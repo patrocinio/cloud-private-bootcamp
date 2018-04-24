@@ -12,6 +12,10 @@
 - Sizing and capacity planning
 - Services catalog
 - Storage and network
+- Resiliency
+- Backup and restore
+- Security
+- Troubleshooting
 ## Day 3 (Installation and configuration)##
 - IBM Cloud Private installation
 - Configuration

@@ -42,7 +42,6 @@ Log in using `username: admin` and `password: admin`
 
 ### Getting Started <a name="gettingstarted"></a>
 The first screen that is displayed when you successfully log in is the **Getting Started** page.
-
 ![ICP Getting Started Screen](images/treasurehunt/getstarted.jpg)
 
 Locate the following information:
@@ -54,7 +53,10 @@ Locate the following information:
 3. What tool could you use to **chat with the team** if you have any issues?
 
 ### Dashboard <a name="dashboard"></a>
-Click **Menu** and then select **Dashboard** to navigate to the Dashboard page. The Dashboard page provides an overview of the current status of the ICP Cluster. Locate the following information:
+Click **Menu** (in the top left corner of the page) and then select **Dashboard** to navigate to the Dashboard page. The Dashboard page provides an overview of the current status of the ICP cluster.
+![ICP Dashboard](images/treasurehunt/dashboard.jpg)
+
+Locate the following information:
 
 1. How many **Nodes** are in your ICP Cluster?
 
@@ -64,10 +66,14 @@ Click **Menu** and then select **Dashboard** to navigate to the Dashboard page. 
 
 ### Nodes <a name="nodes"></a>
 Click **Menu** and then select **Platform > Nodes** to navigate to the Nodes page. This page displays information about the nodes that are part of the ICP Cluster.
+![ICP Nodes Screen](images/treasurehunt/nodes.jpg)
 
 Note: Click the **command prompt** icon in the bottom right corner of the screen to see the command that a user would need to issue from the **Kubernetes CLI command prompt** to see the same information that has been displayed in the Administration Console.
 
+![ICP CLI Commands](images/treasurehunt/cli.jpg)
+
 Click on the **Name** of the node to *drill down* and see more information about a node.
+![ICP Node Name](images/treasurehunt/nodename.jpg)
 
 Locate the following information:
 

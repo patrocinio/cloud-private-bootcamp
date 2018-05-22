@@ -36,7 +36,7 @@ In this lab exercise you will become familiar with the IBM Cloud Private Adminis
 ### Log in to your ICP Admin Console <a name="login"></a>
 If you aren't already logged in to the ICP Admin Console from a previous exercise, open a browser and navigate to `https://<icp_master_ip>/8443`
 
-<screenshot>
+![ICP Login Screen](images/treasurehunt/login.jpg)
 
 Log in using `username: admin` and `password: admin`
 
@@ -59,7 +59,23 @@ Click **Menu** and then select **Dashboard** to navigate to the Dashboard page. 
 3. Are all of the **Deployments** in your ICP Cluster healthy?
 
 ### Nodes <a name="nodes"></a>
-Click **Menu** and then select **Platform > Nodes** to navigate to the Nodes page
+Click **Menu** and then select **Platform > Nodes** to navigate to the Nodes page. This page displays information about the nodes that are part of the ICP Cluster.
+
+Note: Click the **command prompt** icon in the bottom right corner of the screen to see the command that a user would need to issue from the **Kubernetes CLI command prompt** to see the same information that has been displayed in the Administration Console.
+
+Click on the **Name** of the node to *drill down* and see more information about a node.
+
+Locate the following information:
+
+1. How many **Worker nodes** are in your cluster?
+
+2. What is the **Architecture** of your master node?
+
+3. How much **memory** does your proxy node have?
+
+4. How many **CPUs** do each of your worker nodes have?
+
+5. Which node is the **logging-elk-data-0** pod deployed to?
 
 ### Namespaces <a name="namespaces"></a>
 Click **Menu** and then select **Manage > Namespaces** to navigate to the Namespaces page

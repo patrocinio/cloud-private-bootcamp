@@ -1,6 +1,11 @@
 Lab - Console Treasure Hunt
 ---
 
+#### Table of contents
+[1. Log in to your ICP Admin Console ](# Log in to your ICP Admin Console)
+
+[2. Storage](#storage)
+
 In this lab exercise you will become familiar with the IBM Cloud Private Administration Console by completing a Treasure Hunt.
 
 #### Log in to your ICP Admin Console
@@ -28,7 +33,7 @@ Click **Menu** and then select **Manage > Namespaces** to navigate to the Namesp
 #### Helm Charts
 Click **Catalog** on the navigation bar to navigate to the Helm Chart Catalog page
 
-#### Storage
+#### Storage <a name="storage"></a>
 
 #### Monitoring
 

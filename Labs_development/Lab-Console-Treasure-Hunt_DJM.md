@@ -88,22 +88,53 @@ Locate the following information:
 5. Which node is the **logging-elk-data-0** pod deployed to?
 
 ### Namespaces <a name="namespaces"></a>
-Click **Menu** and then select **Manage > Namespaces** to navigate to the Namespaces page
+Click **Menu** and then select **Manage > Namespaces** to navigate to the Namespaces page.
+
+Users are assigned to organizational units called namespaces.
+Namespaces are also known as tenants or accounts. In IBM Cloud Private, users are assigned to teams. You can assign multiple namespaces to a team. Users of a team are members of the team's namespaces.
+![ICP Namespaces](images/treasurehunt/namespaces.jpg)
+
+Locate the following information:
+
+1. How many **namespaces** have been automatically created in your cluster during installation?
+
+2. What **actions** are you able to take on namespaces?
 
 ### Helm Charts <a name="helmcharts"></a>
-Click **Catalog** on the navigation bar to navigate to the Helm Chart Catalog page
+Click **Catalog** on the navigation bar to navigate to the Helm Chart Catalog page.
+![Catalog Link](images/treasurehunt/cataloglink.jpg)
+
+By using the Catalog, you can browse and install packages in your IBM Cloud Private cluster from Helm charts.
+
+The Catalog displays Helm charts, which contain application packages that can run as Kubernetes services. The packages are stored in repositories. The Catalog in IBM Cloud Private contains connections to recommended repositories by default, but you can connect to other repositories. After you connect to a repository, you can access its charts from the Catalog. Application developers can also develop applications and publish them in the Catalog so that other users can easily access and install the applications.
+
+![ICP Catalog](images/treasurehunt/catalog.jpg)
+
+Note: Click on the Helm Chart name to view the readme file
+
+Locate the following information:
+
+1. What date was the **ibm-jenkins-dev** Helm chart released?
+
+2. How many MQ servers does the **ibm-mq-advanced-dev** Helm chart deploy?
+
+3. What type of server does the **ibm-swift-sample** Helm chart deploy the sample application on?
+
+Click **Menu** and then select **Manage > Helm Repositories** to navigate to the list of configured Helm repositories page.
+
+![ICP Helm Repositories](images/treasurehunt/helmrepo.jpg)
 
 ### Storage <a name="storage"></a>
-Click **Menu** and then select **Platform > Storage** to navigate to the Storage page
+Click **Menu** and then select **Platform > Storage** to navigate to the Storage page.
 
 ### Monitoring <a name="monitoring"></a>
-Click **Menu** and then select **Platform > Monitoring** to navigate to the Monitoring page
+Click **Menu** and then select **Platform > Monitoring** to navigate to the Monitoring page.
 
 ### Alerts <a name="alerts"></a>
-Click **Menu** and then select **Platform > Alert** to navigate to the Alerts page
+Click **Menu** and then select **Platform > Alert** to navigate to the Alerts page.
 
 ### Deployments <a name="deployments"></a>
-Click **Menu** and then select **Workloads > Deployments** to navigate to the Deployments page
+Click **Menu** and then select **Workloads > Deployments** to navigate to the Deployments page.
 
 ### StatefulSets <a name="statefulsets"></a>
 Click **Menu** and then select **Workloads > StatefulSets** to navigate to the StatefulSets page
@@ -112,10 +143,10 @@ Click **Menu** and then select **Workloads > StatefulSets** to navigate to the S
 Click **Menu** and then select **Workloads > DaemonSets** to navigate to the DaemonSets page
 
 ### Services <a name="services"></a>
-Click **Menu** and then select **Network Access > Services** to navigate to the Services page
+Click **Menu** and then select **Network Access > Services** to navigate to the Services page.
 
 ### Ingress <a name="ingress"></a>
-Click **Ingress** to navigate to the Ingress page
+Click **Ingress** to navigate to the Ingress page.
 
 #### Command Line Parameters <a name="cmdline"></a>
-Click the **User** icon on the navigation bar and then select **Configure Client** to display the commands that are used to configure a kubectl command line to connect to this ICP Cluster
+Click the **User** icon on the navigation bar and then select **Configure Client** to display the commands that are used to configure a kubectl command line to connect to this ICP Cluster.

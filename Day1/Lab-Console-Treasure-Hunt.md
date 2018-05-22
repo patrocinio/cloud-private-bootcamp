@@ -28,6 +28,7 @@ Lab - Console Treasure Hunt
 
 [13. Command Line Parameters](#cmdline)
 
+## Overview
 In this lab exercise you will become familiar with the IBM Cloud Private Administration Console by completing a Treasure Hunt.
 
 ### Log in to your ICP Admin Console <a name="login"></a>

@@ -176,22 +176,94 @@ Locate the following information:
 Close the ICP Alert Manager tab.
 
 ### Deployments <a name="deployments"></a>
-Click **Menu** and then select **Workloads > Deployments** to navigate to the Deployments page.
+Click **Menu** and then select **Workloads > Deployments** to navigate to the Deployments page. A **Deployment controller** provides declarative updates for **Pods and ReplicaSets**. You describe a desired state in a Deployment object, and the Deployment controller changes the actual state to the desired state at a controlled rate. You can define Deployments to create new ReplicaSets, or to remove existing Deployments and adopt all their resources with new Deployments.
+
+![ICP Deployments](images/treasurehunt/deployments.jpg)
+
+Notes:
+1. Click on a Deployment Name to *drill down* and see more information such as the **Pods** that are part of the Deployment. Drill-down on a Pod to find out information about the Container and Logs
+
+2. Use the **Namespace** drop down box in the top right corner of the page to change the Deployments that are displayed.
+
+Locate the following information:
+
+1. How many Deployments are in the **default** Namespace
+
+2. How many **Pods** are part of the **helm-api** Deployment
+
+3. Which **Containers** are part of the **helm-api** Deployment
+
+4. Find the **Logs** for the **es-client** Container in the **logging-elk-client** Deployment
+
+5. Which **Ports** are exposed on the **es-client** Container in the **logging-elk-client** Deployment
 
 ### StatefulSets <a name="statefulsets"></a>
-Click **Menu** and then select **Workloads > StatefulSets** to navigate to the StatefulSets page
+Click **Menu** and then select **Workloads > StatefulSets** to navigate to the StatefulSets page. Like a Deployment, a StatefulSet manages Pods that are based on an identical container spec. Unlike a Deployment, a StatefulSet maintains a sticky identity for each of their Pods. These pods are created from the same spec, but are not interchangeable: each has a persistent identifier that it maintains across any rescheduling.
+
+![ICP StatefulSet](images/treasurehunt/statefulset.jpg)
+
+Locate the following information:
+
+1. How many StatefulSets are in the **default** Namespace
+
+2. How many **Pods** are part of the **icp-mongodb** StatefulSet
+
+3. Which **Containers** are part of the **image-manager-0** StatefulSet
+
+4. Find the **Logs** for the **iamge-manager* Container in the **image-manager-0** StatefulSet
 
 ### DaemonSets <a name="daemonsets"></a>
-Click **Menu** and then select **Workloads > DaemonSets** to navigate to the DaemonSets page
+Click **Menu** and then select **Workloads > DaemonSets** to navigate to the DaemonSets page. A DaemonSet ensures that all (or some) Nodes run a copy of a Pod. As nodes are added to the cluster, Pods are added to them. As nodes are removed from the cluster, those Pods are garbage collected. Deleting a DaemonSet will clean up the Pods it created.
+
+![ICP DaemonSet](images/treasurehunt/daemonset.jpg)
+
+Locate the following information:
+
+1. How many Nodes is the **calico-node** DaemonSet deployed to?
+
+2. How many Nodes is the **rescheduler** DaemonSet deployed to?
+
+3. How does Kubernetes know which Nodes to deploy a DaemonSet to?
 
 ### Services <a name="services"></a>
-Click **Menu** and then select **Network Access > Services** to navigate to the Services page.
+Click **Menu** and then select **Network Access > Services** to navigate to the Services page. Kubernetes Pods are mortal. They are born and when they die, they are not resurrected. ReplicaSets in particular create and destroy Pods dynamically (e.g. when scaling up or down). While each Pod gets its own IP address, even those IP addresses cannot be relied upon to be stable over time. This leads to a problem: if some set of Pods (let’s call them backends) provides functionality to other Pods (let’s call them frontends) inside the Kubernetes cluster, how do those frontends find out and keep track of which backends are in that set?
+
+Enter **Services**.
+
+A Kubernetes Service is an abstraction which defines a logical set of Pods and a policy by which to access them - sometimes called a micro-service. The set of Pods targeted by a Service is (usually) determined by a Label Selector.
+
+![ICP Services](images/treasurehunt/services.jpg)
+
+Note: Use the **Action** link next to a service to view more information than is displayed in the Admin Console
+
+Locate the following information:
+
+1. What is the **Label Selector** for the **helm-api** Service?
+
+2. Which **Port** is the **monitoring-prometeus** Service exposing?
+
+3. What is the **targetPort** for the **monitoring-prometeus** Service? (Hint: use the Action link to *drill down* on the Service)
+
+4. In order to access the **monitoring-prometeus** Service would an application use the **Port** and **targetPort**?
+
+5. Can you access a Service in an ICP Cluster from a browser running outside of the ICP Cluster network?
 
 ### Ingress <a name="ingress"></a>
-Click **Ingress** to navigate to the Ingress page.
+Click **Ingress** to navigate to the Ingress page. An Ingress is an API object that manages external access to the services in a cluster, typically HTTP. Ingress can provide load balancing, SSL termination and name-based virtual hosting.
+
+![ICP Ingress](images/treasurehunt/ingress.jpg)
+
+Locate the following information:
+
+1. What **Path** is the **helm-api** Ingress configured to listen on? (Hint: use the Action link to *drill down* on the Ingress)
+
+2. How does the **helm-api** Ingress locate the target **Pod**?
+
+3. Can you access an Ingress in an ICP Cluster from a browser running outside of the ICP Cluster network?
 
 ### Command Line Parameters <a name="cmdline"></a>
 Click the **User** icon on the navigation bar and then select **Configure Client** to display the commands that are used to configure a kubectl command line to connect to this ICP Cluster.
+
 ![Configure Client](images/treasurehunt/configureclient.jpg)
 
 ![ICP Alert Manager](images/treasurehunt/kubectl.jpg)

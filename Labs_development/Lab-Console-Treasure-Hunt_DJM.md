@@ -165,7 +165,15 @@ Locate the following information:
 Close the Grafana browser tab
 
 ### Alerts <a name="alerts"></a>
-Click **Menu** and then select **Platform > Alert** to navigate to the Alerts page.
+Click **Menu** and then select **Platform > Alerting** to open the ICP Alert Manager in a new browser tab.
+
+![ICP Alert Manager](images/treasurehunt/alerts.jpg)
+
+Locate the following information:
+
+1. How many **Alerts** are configured in your ICP cluster?
+
+Close the ICP Alert Manager tab.
 
 ### Deployments <a name="deployments"></a>
 Click **Menu** and then select **Workloads > Deployments** to navigate to the Deployments page.
@@ -184,3 +192,14 @@ Click **Ingress** to navigate to the Ingress page.
 
 ### Command Line Parameters <a name="cmdline"></a>
 Click the **User** icon on the navigation bar and then select **Configure Client** to display the commands that are used to configure a kubectl command line to connect to this ICP Cluster.
+![Configure Client](images/treasurehunt/configureclient.jpg)
+
+![ICP Alert Manager](images/treasurehunt/kubectl.jpg)
+
+Locate the following information:
+
+1. What should you do with the commands that are displayed here?
+
+Close the **Configure client** dialog box
+
+## End of Lab Exercise

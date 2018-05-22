@@ -127,6 +127,22 @@ Click **Menu** and then select **Manage > Helm Repositories** to navigate to the
 ### Storage <a name="storage"></a>
 Click **Menu** and then select **Platform > Storage** to navigate to the Storage page.
 
+Data storage in a Kubernetes cluster is handled by using volumes. For Kubernetes, a PersistentVolume (PV) is a piece of networked storage in a cluster that is provisioned by an administrator. A PersistentVolumeClaim (PVC) is a request for storage that is made by a user.
+
+In an IBM Cloud Private cluster, administrators can create PersistentVolumes that are available to all projects in the cluster. Users can then create PersistentVolumeClaims to request this resource for their application. All PersistentVolume types that are supported by Kubernetes are also supported by IBM Cloud Private.
+![ICP Volumes](images/treasurehunt/volumes.jpg)
+
+Click **PersistentVolumeClaim** to see the current Persistent Volume Claims in the ICP Cluster
+![ICP Volume Claims](images/treasurehunt/volumeclaims.jpg)
+
+Locate the following information:
+
+1. What is the capacity of the **helm-repo-pv** Persistent Volume?
+
+2. What is the reclaim policy of the **mongodb** Persistent Volume?
+
+3. What namespace is the **helm-repo-pvc** Persistent Volume Claim in?
+
 ### Monitoring <a name="monitoring"></a>
 Click **Menu** and then select **Platform > Monitoring** to navigate to the Monitoring page.
 
@@ -148,5 +164,5 @@ Click **Menu** and then select **Network Access > Services** to navigate to the 
 ### Ingress <a name="ingress"></a>
 Click **Ingress** to navigate to the Ingress page.
 
-#### Command Line Parameters <a name="cmdline"></a>
+### Command Line Parameters <a name="cmdline"></a>
 Click the **User** icon on the navigation bar and then select **Configure Client** to display the commands that are used to configure a kubectl command line to connect to this ICP Cluster.

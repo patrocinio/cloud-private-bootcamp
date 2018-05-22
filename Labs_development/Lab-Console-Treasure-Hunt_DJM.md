@@ -10,25 +10,27 @@ Lab - Console Treasure Hunt
 
 [4. Nodes](#nodes)
 
-[4. Namespaces](#namespaces)
+[5. Namespaces](#namespaces)
 
-[5. Helm Charts](#helmcharts)
+[6. Helm Charts](#helmcharts)
 
-[7. Monitoring](#monitoring)
+[7. Storage](#storage)
 
-[8. Alerts](#alerts)
+[8. Monitoring](#monitoring)
 
-[9. Deployments](#deployments)
+[9. Alerts](#alerts)
 
-[10. StatefulSets](#statefulsets)
+[10. Deployments](#deployments)
 
-[11. DaemonSets](#daemonsets)
+[11. StatefulSets](#statefulsets)
 
-[12. Services](#services)
+[12. DaemonSets](#daemonsets)
 
-[13. Ingress](#ingress)
+[13. Services](#services)
 
-[14. Command Line Parameters](#cmdline)
+[14. Ingress](#ingress)
+
+[15. Command Line Parameters](#cmdline)
 
 ## Overview
 In this lab exercise you will become familiar with the IBM Cloud Private Administration Console by completing a Treasure Hunt.

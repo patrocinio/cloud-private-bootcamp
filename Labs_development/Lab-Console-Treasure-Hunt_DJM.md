@@ -41,7 +41,11 @@ If you aren't already logged in to the ICP Admin Console from a previous exercis
 Log in using `username: admin` and `password: admin`
 
 ### Getting Started <a name="gettingstarted"></a>
-The first screen that is displayed when you successfully log in is the **Getting Started** page. Locate the following information:
+The first screen that is displayed when you successfully log in is the **Getting Started** page.
+
+![ICP Getting Started Screen](images/treasurehunt/getstarted.jpg)
+
+Locate the following information:
 
 1. Which catalog item would you use if you want to **migrate an application that uses WebSphere Application Server**?
 

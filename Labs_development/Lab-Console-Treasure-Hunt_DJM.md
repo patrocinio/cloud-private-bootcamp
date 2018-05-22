@@ -144,7 +144,25 @@ Locate the following information:
 3. What namespace is the **helm-repo-pvc** Persistent Volume Claim in?
 
 ### Monitoring <a name="monitoring"></a>
-Click **Menu** and then select **Platform > Monitoring** to navigate to the Monitoring page.
+Click **Menu** and then select **Platform > Monitoring** to open Grafana in a new browser window.
+
+![Grafana Home](images/treasurehunt/grafanahome.jpg)
+
+Click **Home** on the navigation bar and select **ICP 2.1 Performance IBM Provided 2.5** from the list to open the IBM provided Grafana page
+
+![Grafana ICP](images/treasurehunt/grafanaicp.jpg)
+
+Locate the following information:
+
+1. How many **active pods** are in your ICP cluster?
+
+2. How much **memory** is available in your ICP cluster?
+
+3. Which **pod** is using the most memory currently?
+
+3. Which **pod** is using the most CPU currently?
+
+Close the Grafana browser tab
 
 ### Alerts <a name="alerts"></a>
 Click **Menu** and then select **Platform > Alert** to navigate to the Alerts page.

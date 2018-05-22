@@ -8,25 +8,27 @@ Lab - Console Treasure Hunt
 
 [3. Dashboard](#dashboard)
 
+[4. Nodes](#nodes)
+
 [4. Namespaces](#namespaces)
 
 [5. Helm Charts](#helmcharts)
 
-[6. Monitoring](#monitoring)
+[7. Monitoring](#monitoring)
 
-[7. Alerts](#alerts)
+[8. Alerts](#alerts)
 
-[8. Deployments](#deployments)
+[9. Deployments](#deployments)
 
-[9. StatefulSets](#statefulsets)
+[10. StatefulSets](#statefulsets)
 
-[10. DaemonSets](#daemonsets)
+[11. DaemonSets](#daemonsets)
 
-[11. Services](#services)
+[12. Services](#services)
 
-[12. Ingress](#ingress)
+[13. Ingress](#ingress)
 
-[13. Command Line Parameters](#cmdline)
+[14. Command Line Parameters](#cmdline)
 
 ## Overview
 In this lab exercise you will become familiar with the IBM Cloud Private Administration Console by completing a Treasure Hunt.
@@ -48,7 +50,16 @@ The first screen that is displayed when you successfully log in is the **Getting
 3. What tool could you use to **chat with the team** if you have any issues?
 
 ### Dashboard <a name="dashboard"></a>
-Click **Menu** and then select **Dashboard** to navigate to the Dashboard page
+Click **Menu** and then select **Dashboard** to navigate to the Dashboard page. The Dashboard page provides an overview of the current status of the ICP Cluster. Locate the following information:
+
+1. How many **Nodes** are in your ICP Cluster?
+
+2. How much **Storage** is currently available in your ICP Cluster?
+
+3. Are all of the **Deployments** in your ICP Cluster healthy?
+
+### Nodes <a name="nodes"></a>
+Click **Menu** and then select **Platform > Nodes** to navigate to the Nodes page
 
 ### Namespaces <a name="namespaces"></a>
 Click **Menu** and then select **Manage > Namespaces** to navigate to the Namespaces page
@@ -57,20 +68,28 @@ Click **Menu** and then select **Manage > Namespaces** to navigate to the Namesp
 Click **Catalog** on the navigation bar to navigate to the Helm Chart Catalog page
 
 ### Storage <a name="storage"></a>
+Click **Menu** and then select **Platform > Storage** to navigate to the Storage page
 
 ### Monitoring <a name="monitoring"></a>
+Click **Menu** and then select **Platform > Monitoring** to navigate to the Monitoring page
 
 ### Alerts <a name="alerts"></a>
+Click **Menu** and then select **Platform > Alert** to navigate to the Alerts page
 
 ### Deployments <a name="deployments"></a>
+Click **Menu** and then select **Workloads > Deployments** to navigate to the Deployments page
 
 ### StatefulSets <a name="statefulsets"></a>
+Click **Menu** and then select **Workloads > StatefulSets** to navigate to the StatefulSets page
 
 ### DaemonSets <a name="daemonsets"></a>
+Click **Menu** and then select **Workloads > DaemonSets** to navigate to the DaemonSets page
 
 ### Services <a name="services"></a>
+Click **Menu** and then select **Network Access > Services** to navigate to the Services page
 
 ### Ingress <a name="ingress"></a>
+Click **Ingress** to navigate to the Ingress page
 
 #### Command Line Parameters <a name="cmdline"></a>
 Click the **User** icon on the navigation bar and then select **Configure Client** to display the commands that are used to configure a kubectl command line to connect to this ICP Cluster

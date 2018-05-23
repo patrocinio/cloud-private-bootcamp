@@ -2,12 +2,14 @@ Lab - Install CLI and Tools
 ---
 
 ### Table of contents
-[1. Install kubcetl](#kubectl)
+[1. Install kubectl](#kubectl)
 
 [2. Configure kubectl to connect to your ICP Cluster](#connect)
 
+[2. Install the ICP CLI](#bxcli)
+
 ## Overview
-In this lab exercise you will install the IBM Cloud Private CLI and other useful tools.
+In this lab exercise you will install the Kubernetes CLI, the IBM Cloud Private CLI and other useful tools.
 
 ### Install kubectl <a name="kubectl"></a>
 In a **terminal** session connected to your `master` node as the **root** user issue the following command to install the `kubectl` Kubernetes CLI
@@ -61,4 +63,93 @@ platform-ui is running at https://9.37.138.189:8001/api/v1/namespaces/kube-syste
 To further debug and diagnose cluster problems, use 'kubectl cluster-info dump'.
 ```
 
+### Install the ICP CLI <a name="bxcli"></a>
+In the terminal window, issue the following commands to download the **IBM Cloud CLI**
+
+```
+cd /tmp
+wget https://clis.ng.bluemix.net/download/bluemix-cli/0.6.1/linux64
+```
+
+Issue the following commands to install the IBM Cloud CLI
+
+```
+mv ./linux64 bx.tar.gz
+tar -xvf bx.tar.gz
+cd Bluemix_CLI*
+./install_bluemix_cli
+```
+
+Issue the following command to download the **ICP CLI** from your ICP instance (insert the IP address of your master node)
+
+```
+cd /tmp
+wget "https://<icp_master_ip>:8443/api/cli/icp-linux-amd64" --no-check-certificate
+```
+
+Issue the following command to install the ICP CLI
+
+```
+bx plugin install ./icp-linux-amd64
+```
+
+Issue the following command to login the ICP CLI in to your ICP Cluster.  
+
+```
+bx pr login -a https://<icp_master_ip>:8443 --skip-ssl-validation
+```
+
+Enter `username: admin` and `password: admin` when prompted and select the `mycluster Account` as shown below
+
+```
+bx pr login -a https://9.37.138.189:8443 --skip-ssl-validation
+API endpoint: https://9.37.138.189:8443
+Username> admin
+Password>
+Authenticating...
+OK
+
+Select an account:
+1. mycluster Account (id-mycluster-account)
+Enter a number> 1
+Targeted account mycluster Account (id-mycluster-account)
+
+Configuring helm and kubectl...
+Configuring kubectl: /root/.bluemix/plugins/icp/clusters/mycluster/kube-config
+Property "clusters.mycluster" unset.
+Property "users.mycluster-user" unset.
+Property "contexts.mycluster-context" unset.
+Cluster "mycluster" set.
+User "mycluster-user" set.
+Context "mycluster-context" created.
+Switched to context "mycluster-context".
+
+Cluster mycluster configured successfully.
+
+Configuring helm: /root/.helm
+Helm configured successfully
+
+OK
+```
+
+Issue the following command to get information about your cluster
+
+```
+bx pr cluster-get mycluster
+```
+
+The results of the command are shown below:
+```
+bx pr cluster-get mycluster
+Retrieving cluster mycluster...
+OK
+
+Name:			mycluster
+ID:			00000000000000000000000000000001
+State:			deployed
+Master URL:		https://kubernetes.default
+Masters:		1
+Workers:		3
+Proxies:		1
+```
 ## End of Lab Exercise

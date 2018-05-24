@@ -69,18 +69,15 @@ The **Kebernetes CLI** is now installed and will be used later in the workshop
 
 
 ### Install the Helm CLI <a name="helm"></a>
-1) In the terminal window, issue the following commands to download the **Helm CLI**
+1) In the terminal window, issue the following commands to download and install the **Helm CLI**
 
 ```
 cd /tmp
-wget https://storage.googleapis.com/kubernetes-helm/helm-v2.9.1-linux-amd64.tar.gz
+docker run -e LICENSE=accept --net=host -v /usr/local/bin:/data ibmcom/icp-helm-api:1.0.0 cp /usr/src/app/public/cli/linux-amd64/helm /data
 ```
 
-2) Issue the following commands to install the **Helm CLI**
+2) Issue the following commands to initialize the **Helm CLI**
 ```
-tar -xvf helm-v2.9.1-linux-amd64.tar.gz
-cd linux-amd64
-mv helm /usr/local/bin
 helm init -c
 ```
 

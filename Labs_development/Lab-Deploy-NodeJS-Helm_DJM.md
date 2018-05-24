@@ -83,10 +83,23 @@ In this section you will create a new namespace to deploy the Helm Charts in to.
 You have now deployed, tested and removed a release of the NodeJS Helm Chart using the ICP Admin Console.
 
 ### Deploy the NodeJS Helm Chart using the Helm CLI <a name="cmdDeploy"></a>
-If you aren't already logged in to the ICP Admin Console from a previous exercise, open a browser and navigate to `https://<icp_master_ip>/8443` and log in using `username: admin` and `password: admin`
 
-Click the **User** icon on the navigation bar and then select **Configure Client** to display the commands that are used to configure a kubectl command line to connect to this ICP Cluster.
+```
+helm init stuff
+```
 
-![Configure Client](images/kubectl/configureclient.jpg)
+```
+cd /tmp
+mkdir nodejs-sample
+cd nodejs-sample
+git int
+git pull https://github.com/ibm-developer/icp-nodejs-sample
+cd chart/ibm-nodejs-sample
+helm install --name tester --namespace nodejs-lab . --tls
+```
+
+```
+helm delete --purge tester --tls
+```
 
 ## End of Lab Exercise

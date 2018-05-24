@@ -65,6 +65,9 @@ platform-ui is running at https://9.37.138.189:8001/api/v1/namespaces/kube-syste
 To further debug and diagnose cluster problems, use 'kubectl cluster-info dump'.
 ```
 
+The **Kebernetes CLI** is now installed and will be used later in the workshop
+
+
 ### Install the ICP CLI <a name="bxcli"></a>
 In the terminal window, issue the following commands to download the **IBM Cloud CLI**
 
@@ -155,9 +158,25 @@ Workers:		3
 Proxies:		1
 ```
 
-# wget https://$accessip:8443/helm-api/cli/linux-amd64/helm --no-check-certificate
-# chmod 755 helm
-# mv helm /usr/local/bin
-# helm init -c
+The **IBM ICP CLI** is now installed and will be used later in the workshop
+
+
+### Install the Helm CLI <a name="helm"></a>
+In the terminal window, issue the following commands to download the **Helm CLI**
+
+```
+cd /tmp
+wget https://storage.googleapis.com/kubernetes-helm/helm-v2.9.1-linux-amd64.tar.gz
+```
+
+Issue the following commands to install the **Helm CLI**
+```
+tar -xvf helm-v2.9.1-linux-amd64.tar.gz
+cd linux-amd64
+mv helm /usr/local/bin
+helm init -c
+```
+
+The **Helm CLI** is now installed and will be used later in the workshop
 
 ## End of Lab Exercise

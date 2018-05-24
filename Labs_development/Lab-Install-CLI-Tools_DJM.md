@@ -6,7 +6,9 @@ Lab - Install CLI and Tools
 
 [2. Configure kubectl to connect to your ICP Cluster](#connect)
 
-[2. Install the ICP CLI](#bxcli)
+[3. Install the ICP CLI](#bxcli)
+
+[4. Install the Helm CLI](#helm)
 
 ## Overview
 In this lab exercise you will install the Kubernetes CLI, the IBM Cloud Private CLI and other useful tools.
@@ -102,7 +104,7 @@ bx pr login -a https://<icp_master_ip>:8443 --skip-ssl-validation
 Enter `username: admin` and `password: admin` when prompted and select the `mycluster Account` as shown below
 
 ```
-bx pr login -a https://9.37.138.189:8443 --skip-ssl-validation
+# bx pr login -a https://9.37.138.189:8443 --skip-ssl-validation
 API endpoint: https://9.37.138.189:8443
 Username> admin
 Password>
@@ -140,7 +142,7 @@ bx pr cluster-get mycluster
 
 The results of the command are shown below:
 ```
-bx pr cluster-get mycluster
+# bx pr cluster-get mycluster
 Retrieving cluster mycluster...
 OK
 
@@ -152,4 +154,10 @@ Masters:		1
 Workers:		3
 Proxies:		1
 ```
+
+# wget https://$accessip:8443/helm-api/cli/linux-amd64/helm --no-check-certificate
+# chmod 755 helm
+# mv helm /usr/local/bin
+# helm init -c
+
 ## End of Lab Exercise

@@ -177,6 +177,24 @@ mv helm /usr/local/bin
 helm init -c
 ```
 
+The results of the commands are shown below
+
+```
+# helm init -c
+Creating /root/.helm/repository
+Creating /root/.helm/repository/cache 
+Creating /root/.helm/repository/local
+Creating /root/.helm/plugins
+Creating /root/.helm/starters
+Creating /root/.helm/cache/archive
+Creating /root/.helm/repository/repositories.yaml
+Adding stable repo with URL: https://kubernetes-charts.storage.googleapis.com
+Adding local repo with URL: http://127.0.0.1:8879/charts
+$HELM_HOME has been configured at /root/.helm.
+Not installing Tiller due to 'client-only' flag having been set
+Happy Helming!
+```
+
 The **Helm CLI** is now installed and will be used later in the workshop
 
 ## End of Lab Exercise

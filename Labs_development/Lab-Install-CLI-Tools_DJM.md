@@ -14,24 +14,24 @@ Lab - Install CLI and Tools
 In this lab exercise you will install the Kubernetes CLI, the IBM Cloud Private CLI and other useful tools.
 
 ### Install kubectl <a name="kubectl"></a>
-In a **terminal** session connected to your `master` node as the **root** user issue the following command to install the `kubectl` Kubernetes CLI
+1) In a **terminal** session connected to your `master` node as the **root** user issue the following command to install the `kubectl` Kubernetes CLI
 
 ```
 docker run -e LICENSE=accept --net=host -v /usr/local/bin:/data ibmcom/icp-inception:2.1.0.3-ee cp /usr/local/bin/kubectl /data
 ```
 
 ### Configure kubectl to connect to your ICP Cluster <a name="connect"></a>
-If you aren't already logged in to the ICP Admin Console from a previous exercise, open a browser and navigate to `https://<icp_master_ip>/8443` and log in using `username: admin` and `password: admin`
+1) If you aren't already logged in to the ICP Admin Console from a previous exercise, open a browser and navigate to `https://<icp_master_ip>/8443` and log in using `username: admin` and `password: admin`
 
-Click the **User** icon on the navigation bar and then select **Configure Client** to display the commands that are used to configure a kubectl command line to connect to this ICP Cluster.
+2) Click the **User** icon on the navigation bar and then select **Configure Client** to display the commands that are used to configure a kubectl command line to connect to this ICP Cluster.
 
 ![Configure Client](images/kubectl/configureclient.jpg)
 
-When the **Configure client** dialog is displayed, click the copy commands icon as shown below:
+3) When the **Configure client** dialog is displayed, click the copy commands icon as shown below:
 
 ![Copy Commands](images/kubectl/copycommands.jpg)
 
-Return to the terminal window and paste in the commands. The output will be similar to that shown below:
+4) Return to the terminal window and paste in the commands. The output will be similar to that shown below:
 
 ```
 # kubectl config set-cluster cluster.local --server=https://9.37.138.189:8001 --insecure-skip-tls-verify=true
@@ -50,7 +50,7 @@ Context "cluster.local-context" modified.
 Switched to context "cluster.local-context".
 ```
 
-Issue the following command to get information about your ICP Cluster: `kubectl cluster-info`
+5) Issue the following command to get information about your ICP Cluster: `kubectl cluster-info`
 
 ```
 # kubectl cluster-info
@@ -69,14 +69,14 @@ The **Kebernetes CLI** is now installed and will be used later in the workshop
 
 
 ### Install the Helm CLI <a name="helm"></a>
-In the terminal window, issue the following commands to download the **Helm CLI**
+1) In the terminal window, issue the following commands to download the **Helm CLI**
 
 ```
 cd /tmp
 wget https://storage.googleapis.com/kubernetes-helm/helm-v2.9.1-linux-amd64.tar.gz
 ```
 
-Issue the following commands to install the **Helm CLI**
+2) Issue the following commands to install the **Helm CLI**
 ```
 tar -xvf helm-v2.9.1-linux-amd64.tar.gz
 cd linux-amd64
@@ -105,14 +105,14 @@ Happy Helming!
 The **Helm CLI** is now installed and will be used later in the workshop
 
 ### Install the ICP CLI <a name="bxcli"></a>
-In the terminal window, issue the following commands to download the **IBM Cloud CLI**
+1) In the terminal window, issue the following commands to download the **IBM Cloud CLI**
 
 ```
 cd /tmp
 wget https://clis.ng.bluemix.net/download/bluemix-cli/0.6.1/linux64
 ```
 
-Issue the following commands to install the IBM Cloud CLI
+2) Issue the following commands to install the IBM Cloud CLI
 
 ```
 mv ./linux64 bx.tar.gz
@@ -121,26 +121,25 @@ cd Bluemix_CLI*
 ./install_bluemix_cli
 ```
 
-Issue the following command to download the **ICP CLI** from your ICP instance (insert the IP address of your master node)
+3) Issue the following command to download the **ICP CLI** from your ICP instance (insert the IP address of your master node)
 
 ```
 cd /tmp
 wget "https://<icp_master_ip>:8443/api/cli/icp-linux-amd64" --no-check-certificate
 ```
-
-Issue the following command to install the ICP CLI
+4) Issue the following command to install the ICP CLI
 
 ```
 bx plugin install ./icp-linux-amd64
 ```
 
-Issue the following command to login the ICP CLI in to your ICP Cluster.  
+5) Issue the following command to login the ICP CLI in to your ICP Cluster.  
 
 ```
 bx pr login -a https://<icp_master_ip>:8443 --skip-ssl-validation
 ```
 
-Enter `username: admin` and `password: admin` when prompted and select the `mycluster Account` as shown below
+6) Enter `username: admin` and `password: admin` when prompted and select the `mycluster Account` as shown below
 
 ```
 # bx pr login -a https://9.37.138.189:8443 --skip-ssl-validation
@@ -173,7 +172,7 @@ Helm configured successfully
 OK
 ```
 
-Issue the following command to get information about your cluster
+7) Issue the following command to get information about your cluster
 
 ```
 bx pr cluster-get mycluster

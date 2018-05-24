@@ -6,9 +6,9 @@ Lab - Install CLI and Tools
 
 [2. Configure kubectl to connect to your ICP Cluster](#connect)
 
-[3. Install the ICP CLI](#bxcli)
+[3. Install the Helm CLI](#helm)
 
-[4. Install the Helm CLI](#helm)
+[4. Install the ICP CLI](#bxcli)
 
 ## Overview
 In this lab exercise you will install the Kubernetes CLI, the IBM Cloud Private CLI and other useful tools.
@@ -17,7 +17,7 @@ In this lab exercise you will install the Kubernetes CLI, the IBM Cloud Private 
 In a **terminal** session connected to your `master` node as the **root** user issue the following command to install the `kubectl` Kubernetes CLI
 
 ```
-docker run -e LICENSE=accept --net=host -v /usr/local/bin:/data ibmcom/icp-inception:2.1.0.2-ee cp /usr/local/bin/kubectl /data
+docker run -e LICENSE=accept --net=host -v /usr/local/bin:/data ibmcom/icp-inception:2.1.0.3-ee cp /usr/local/bin/kubectl /data
 ```
 
 ### Configure kubectl to connect to your ICP Cluster <a name="connect"></a>
@@ -67,6 +67,42 @@ To further debug and diagnose cluster problems, use 'kubectl cluster-info dump'.
 
 The **Kebernetes CLI** is now installed and will be used later in the workshop
 
+
+### Install the Helm CLI <a name="helm"></a>
+In the terminal window, issue the following commands to download the **Helm CLI**
+
+```
+cd /tmp
+wget https://storage.googleapis.com/kubernetes-helm/helm-v2.9.1-linux-amd64.tar.gz
+```
+
+Issue the following commands to install the **Helm CLI**
+```
+tar -xvf helm-v2.9.1-linux-amd64.tar.gz
+cd linux-amd64
+mv helm /usr/local/bin
+helm init -c
+```
+
+The results of the commands are shown below
+
+```
+# helm init -c
+Creating /root/.helm/repository
+Creating /root/.helm/repository/cache
+Creating /root/.helm/repository/local
+Creating /root/.helm/plugins
+Creating /root/.helm/starters
+Creating /root/.helm/cache/archive
+Creating /root/.helm/repository/repositories.yaml
+Adding stable repo with URL: https://kubernetes-charts.storage.googleapis.com
+Adding local repo with URL: http://127.0.0.1:8879/charts
+$HELM_HOME has been configured at /root/.helm.
+Not installing Tiller due to 'client-only' flag having been set
+Happy Helming!
+```
+
+The **Helm CLI** is now installed and will be used later in the workshop
 
 ### Install the ICP CLI <a name="bxcli"></a>
 In the terminal window, issue the following commands to download the **IBM Cloud CLI**
@@ -160,41 +196,5 @@ Proxies:		1
 
 The **IBM ICP CLI** is now installed and will be used later in the workshop
 
-
-### Install the Helm CLI <a name="helm"></a>
-In the terminal window, issue the following commands to download the **Helm CLI**
-
-```
-cd /tmp
-wget https://storage.googleapis.com/kubernetes-helm/helm-v2.9.1-linux-amd64.tar.gz
-```
-
-Issue the following commands to install the **Helm CLI**
-```
-tar -xvf helm-v2.9.1-linux-amd64.tar.gz
-cd linux-amd64
-mv helm /usr/local/bin
-helm init -c
-```
-
-The results of the commands are shown below
-
-```
-# helm init -c
-Creating /root/.helm/repository
-Creating /root/.helm/repository/cache 
-Creating /root/.helm/repository/local
-Creating /root/.helm/plugins
-Creating /root/.helm/starters
-Creating /root/.helm/cache/archive
-Creating /root/.helm/repository/repositories.yaml
-Adding stable repo with URL: https://kubernetes-charts.storage.googleapis.com
-Adding local repo with URL: http://127.0.0.1:8879/charts
-$HELM_HOME has been configured at /root/.helm.
-Not installing Tiller due to 'client-only' flag having been set
-Happy Helming!
-```
-
-The **Helm CLI** is now installed and will be used later in the workshop
 
 ## End of Lab Exercise

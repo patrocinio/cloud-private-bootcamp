@@ -8,6 +8,8 @@ Lab - Microclimate
 
 [3. Import an example project in to Microclimate](#import)
 
+[4. Create a Jenkins pipeline for the project](#jenkins)
+
 ## Overview
 In this lab exercise you will install **microclimate** in to your ICP Cluster and then work through developing applications from scratch and importing existing applications
 
@@ -211,7 +213,7 @@ microclimate-jenkins-56766f9b49-slxtw                   1/1       Running   0   
 8. Read and accept the Microclimate license agreement and click **Accept**.
 
 
-### Import an example project in to Microclimate <a name="import"></a>
+### Import and test an example project in to Microclimate <a name="import"></a>
 In this section you will import an example NodeJS microservice project in to Microclimate.
 
 1. Select Import Project
@@ -238,11 +240,33 @@ In this section you will import an example NodeJS microservice project in to Mic
 
   ![Dockerfile](images/microclimate/dockerfile.jpg)
 
-9. Open `/node/Jenkinsfile` 
+9. Open `/node/Jenkinsfile` and note that Jenkins will use the IBM provided and maintained `MicroserviceBuilder` library to handle the deployment
 
+  ![Jenkinsfile](images/microclimate/jenkinsfile.jpg)
 
+10. By now the sample application should have been automatically deployed and started by Microclimate and the status in the top left of the screen should now by **Running**. If the status is still **Not running**, just wait a little longer...
 
-#### Creating a Microclimate pipeline
+  ![Application is running](images/microclimate/running.jpg)
+
+11. Click on **App Logs** to display the logs from the running container
+
+  ![Logs](images/microclimate/logs.jpg)
+
+12. Click on **Open app** to open the application in the embedded browser. Note that the **Application URL** is displayed and you can copy it to a new browser tab outside of Microclimate and access the application directly.
+
+  ![Open App](images/microclimate/openapp1.jpg)
+
+13. Click on **Edit code** and return to the `/node/public/index.html` file. Change the `Hello world! This is a StarterKit` line to a different value and save your changes.
+
+  ![New Index.html](images/microclimate/index2.jpg)
+
+14. After a few seconds you should see the application status change to `Not running` and then soon after that back to `Running`. Microclimate has deployed the change to ICP. Click on **Open app** and view your change. Note that the Application URL has changed to use a new Port.
+
+  ![Open App](images/microclimate/openapp2.jpg)
+
+15. Return to the **ICP Admin Console** and locate the **Deployment** and **Service** for your application.
+
+### Create a Jenkins pipeline for the project <a name="jenkins"></a>
 
 1. Once the workspace loads Select the **Pipeline** view.
 
@@ -268,51 +292,6 @@ In this section you will import an example NodeJS microservice project in to Mic
 2. Search for *node* in the search bar and select the **node-service** in the **microclimate-pipeline-deployments** namespace.
 3. Click on the link next to the Node port field to open up the associated application.
 4. You should see the "*Hello world! This is a StarterKit!*" message confirming the application is running.
-
-
-
-## Extra credit #1
-
-1. Clone the project from the sample library and create your own Github repo.
-2. Modify the message in the /node/public/index.html file and commit the changes to your new repository.
-3. Import the project into Microclimate and create a new pipeline.
-4. Monitor the build process verify your new message shows up when you access the application from ICP.
-5. Change the index.html message again and commit your changes.
-6. Monitor your Jenkins pipeline. What happens?
-
-
-
-## Extra credit #2
-
-1. Pick another project from the samples available.
-
-   https://github.com/microclimate-demo
-
-2. Import one of the other projects.
-
-3. Create a build pipeline.
-
-4. Monitor the build process.
-
-5. What happens?
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 ## End of Lab Exercise

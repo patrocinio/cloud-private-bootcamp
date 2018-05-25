@@ -49,6 +49,8 @@ Microclimate requires two PVCs to function; one to store workspace data and anot
     chmod 777 mc*
     ```
 
+**Note:** These are the only commands you will enter on the `proxy` node in this exercise. All subsequent commands will be entered on the `master` node.
+
 2. In a **terminal** session connected to your `master` node as the **root** user, copy the following PV definition in to a file named `mc-worspace-pv.yaml` and change the **server IP address** (9.37.138.12) to the correct one for your environment.
 
     ```
@@ -147,32 +149,40 @@ In this section you will deploy the Microclimate Helm Chart using the IBM Admin 
 
 3. Enter the following information (accept the defaults for all other values) and click **Install**:
 
+**NOTE**: You must change the Jenkins hostname value to include your icp-proxy-ip address for instance: jenkins.9.37.138.12.nip.io
+
   | Parameter       | Value |
   | ------------- |-------------|
   | Release name  | microclimate |
   | Target namespace  | default (Note: must be default) |
   | I have read and agreed to the License Agreements | yes |
+
+  In the **Persistence** section:
+
+  | Parameter       | Value |
+  | ------------- |-------------|
   | Existing PersistentVolumeClaim Name | mc-workspace-pvc |
   | Dynamic Provisioning | no |
-  | Jenkins hostname | jenkins.<icp-proxy-ip>.nip.io |
+
+  In the **Jenkins** section:
+
+  | Parameter       | Value |
+  | ------------- |-------------|
+  | Jenkins hostname | jenkins.icp-proxy-ip.nip.io |
   | Jenkins - Existing PersistentVolumeClaim Name | mc-jenkins-pvc |
 
-5. You can monitor the status of your deployment from the CLI. May take up to 5 minutes.
+5. You can monitor the status of your deployment from the CLI. Issue the following command `kubectl get po`
 
-   Execute: kubectl get po
+Note: It may take up to 5 minutes to get a **Running** status for all of the microclimate pods
 
 ```
-root@trona1:~# kubectl get po
+# kubectl get po
 
 NAME                                                    READY     STATUS    RESTARTS   AGE
-ldap-64745886dd-p6lq9                                   1/1       Running   0          3h
 microclimate-ibm-microclimate-64cf96cc75-tlm6r          3/3       Running   0          6m
 microclimate-ibm-microclimate-devops-86db55bd57-v76hd   1/1       Running   0          6m
 microclimate-jenkins-56766f9b49-slxtw                   1/1       Running   0          6m
-tiller-deploy-6c64d9f9c6-lljrh                          1/1       Running   0          1m
 ```
-
-
 
 6. Once all the pods are running you can determine how microservice can be accessed.
 

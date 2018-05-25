@@ -122,7 +122,21 @@ cd chart/ibm-nodejs-sample
 helm install --name nodejs-sample-cli --namespace nodejs-lab . --tls
 ```
 
-8) Issue the following command to get the port that was assigned to the Service
+8) Issue the following command to validate that the Helm Chart has been deployed
+
+```
+helm list --namespace nodejs-lab --tls
+```
+
+The output will be similar to that shown below.
+
+```
+# helm list --namespace nodejs-lab --tls
+NAME             	REVISION	UPDATED                 	STATUS CHART                  	NAMESPACE
+nodejs-sample-cli	1       	Fri May 25 08:48:17 2018	DEPLOYEibm-nodejs-sample-1.2.0	nodejs-lab
+```
+
+9) Issue the following command to get the port that was assigned to the Service
 
 ```
 kubectl get --namespace nodejs-lab services nodejs-sample-cli-ibm-no
@@ -136,11 +150,11 @@ NAME                       TYPE       CLUSTER-IP   EXTERNAL-IP   PORT(S)        
 nodejs-sample-cli-ibm-no   NodePort   10.0.0.207   <none>        3000:32457/TCP   1m
 ```
 
-9) Open a browser tab and navigate to **http://icp-proxy-ip:service-port** and validate that the NodeJS Sample application is up and running. For example http://9.37.138.12:32457/
+10) Open a browser tab and navigate to **http://icp-proxy-ip:service-port** and validate that the NodeJS Sample application is up and running. For example http://9.37.138.12:32457/
 
-10) Close the browser tab
+11) Close the browser tab
 
-11) Return to the **ICP Admin Console**, navigate to the **Helm Releases** page and validate that the **nodejs-sample-cli** Helm Release is displayed. Drill-down and validate that the **Port** for the Service is the same as the what was returned by the CLI
+12) Return to the **ICP Admin Console**, navigate to the **Helm Releases** page and validate that the **nodejs-sample-cli** Helm Release is displayed. Drill-down and validate that the **Port** for the Service is the same as the what was returned by the CLI
 
 12) Issue the following commands to remove the NodeJS Sample Helm Chart
 ```

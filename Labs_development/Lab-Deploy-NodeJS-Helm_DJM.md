@@ -23,6 +23,8 @@ In this section you will create a new namespace to deploy the Helm Charts in to.
 ![Namespace](images/helm101/namespace.jpg)
 
 ### Deploy the NodeJS Helm Chart using the ICP Console <a name="consoleDeploy"></a>
+In this section you will deploy, test and then remove the NodeJS Sample Helm Chart using the ICP Admin console
+
 1) Click **Catalog** from the ICP Admin Console menu bar to navigate to the Catalog of Helm Charts
 
 2) Type **nodejs** in to the **Search** box to locate the NodeJS sample
@@ -83,10 +85,27 @@ In this section you will create a new namespace to deploy the Helm Charts in to.
 You have now deployed, tested and removed a release of the NodeJS Helm Chart using the ICP Admin Console.
 
 ### Deploy the NodeJS Helm Chart using the Helm CLI <a name="cmdDeploy"></a>
+In this section you will deploy, test and then remove the NodeJS Sample Helm Chart using the Helm CLI
+
+1) If you don't already have one open, open a **terminal** session connected to your `master` node as the **root** user
+
+2) Configure the kubectl command line to connect to your ICP Cluster (Click the **User** icon on the navigation bar in the ICP Admin Console and then select **Configure Client** and copy the commands and paste them in to the terminal window
+
+3) Issue the following command to login the ICP CLI in to your ICP Cluster.  
 
 ```
-helm init stuff
+bx pr login -a https://<icp_master_ip>:8443 --skip-ssl-validation
 ```
+
+4) Enter `username: admin` and `password: admin` when prompted and select the `mycluster Account`
+
+5) Issue the following command to initialize the Helm CLI
+
+```
+helm init --client-only
+```
+
+6) Issue the following commands to download the NodeJS Sample from github
 
 ```
 cd /tmp
@@ -94,12 +113,38 @@ mkdir nodejs-sample
 cd nodejs-sample
 git int
 git pull https://github.com/ibm-developer/icp-nodejs-sample
-cd chart/ibm-nodejs-sample
-helm install --name tester --namespace nodejs-lab . --tls
 ```
 
+7) Issue the following commands to install the NodeJS Sample Helm Chart in to your ICP cluster
+
 ```
-helm delete --purge tester --tls
+cd chart/ibm-nodejs-sample
+helm install --name nodejs-sample-cli --namespace nodejs-lab . --tls
+```
+
+8) Issue the following command to get the port that was assigned to the Service
+
+```
+kubectl get --namespace nodejs-lab services nodejs-sample-cli-ibm-no
+```
+
+The output will be similar to that shown below. Locate the **Service port** (in the example below it is **32457**)
+
+```
+# kubectl get --namespace nodejs-lab services nodejs-sample-cli-ibm-no
+NAME                       TYPE       CLUSTER-IP   EXTERNAL-IP   PORT(S)          AGE
+nodejs-sample-cli-ibm-no   NodePort   10.0.0.207   <none>        3000:32457/TCP   1m
+```
+
+9) Open a browser tab and navigate to **http://icp-proxy-ip:service-port** and validate that the NodeJS Sample application is up and running. For example http://9.37.138.12:32457/
+
+10) Close the browser tab
+
+11) Return to the **ICP Admin Console**, navigate to the **Helm Releases** page and validate that the **nodejs-sample-cli** Helm Release is displayed. Drill-down and validate that the **Port** for the Service is the same as the what was returned by the CLI
+
+12) Issue the following commands to remove the NodeJS Sample Helm Chart
+```
+helm delete --purge nodejs-sample-cli --tls
 ```
 
 ## End of Lab Exercise

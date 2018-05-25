@@ -1,48 +1,38 @@
-# Install IBM Cloud Private v2.1
+Lab Exercise: Install IBM Cloud Private
+=========================================================================
 
-This is the start of the description of the steps to install IBM Cloud Private.
+In this exercise you will install IBM Cloud Private v2.1.0.3
 
-## Prerequisite steps to Install IBM Cloud Private v2.1
+# Prerequisites
 
-1. If you are building your own VM, you should have already created a clone of the ICP base VM for each VM in the cluster.  At a minimum, this would be the boot-master, the proxy and a couple of worker nodes.
+1. A collection of virtual machines (VMs) has been provided for your use in this lab exercise.  One of the machines is referred to as the "boot" machine, meaning it is the machine that is used to orchestrate the installation.  The boot machine is also going to be the "master" node of the cluster.  This node may also be referred to as the boot-master node.  The other machines will be assigned the roles of "management", "vulnerability advisor (VA)", "proxy" and "worker".
 
-2. If you are using VMs provided to you, then you should have completed all the steps to getting Docker running on at least the boot-master machine. The install process includes installing Docker on each cluster member.  As an expedient we recommend pre-installing Docker on each cluster member.  (See the section [Copy and load ICP docker image tar ball to all cluster VMs](#Copy and load ICP docker image tar ball to all cluster VMs) below for details.)
+1. DNS or the `/etc/hosts` file on each VM should be configured with the proper entries so that each VM can resolve the address of the other members of the cluster.
 
-3. DNS or the `/etc/hosts` file on each VM should be configured with the proper entries so that each VM can resolve the address of the other members of the cluster/cloud.
+1. SSH needs to be set up such that the boot-master VM can ssh as root to each of the other VMs in the cluster (including itself) without using a password.
 
-4. SSH needs to have been set up such that the "boot master" VM can ssh to each of the other VMs in the cluster/cloud as root without using a password.
+1. Ansible is installed on the boot-master machine.  The `/etc/ansible/hosts` file has been configured to include the machines in your cluster.  To check that Ansible is configured properly use: `ansible icp-cluster -m ping`.  You should see a response from each machine including the boot-master.
 
-5. The product install image should be available on the boot-master machine. If not, download the product archives from Passport Advantage (IBM customer) or eXtreme Leverage (IBM internal).  You can find the GA release by searching on, *IBM Cloud Private*.
+1. The product install archive and the Docker install executable should be available on the boot-master machine in `/root/software/icp` and `/root/software/docker` respectively. (TBD - confirm this is where the boot VM will have the install bits) Normally, you would have downloaded the product archives from Passport Advantage (IBM customer) or eXtreme Leverage (IBM internal).  You can find the GA releases by searching on, *IBM Cloud Private*.
 
-6. The ICP Knowledge Center (KC) installation instructions for ICP Cloud Private Enterprise are rooted in the section: [Intalling ICP Cloud Private Enterprise](https://www.ibm.com/support/knowledgecenter/SSBS6K_2.1.0/installing/install_appmod.html).
+1. The ICP Knowledge Center (KC) installation instructions for ICP Cloud Private "Cloud Native" or "Enterprise" are rooted in the section: [Intalling ICP Cloud Private Enterprise](https://www.ibm.com/support/knowledgecenter/SSBS6K_2.1.0/installing/install_appmod.html). (TBD - update this link to 2.1.0.3 KC once it is public)
 
-7. On all VMs in the ICP cluster, if firewalld is running, stop it and disable it until after the ICP install completes.
+1. On all VMs in the ICP cluster, if `firewalld` is running, stop it and disable it until after the ICP install completes.  (Use the ansible playbook to stop and disable the firewall on each VM.)
 
-To see if firewalld is running, use:
-```
-> systemctl status firewalld
-```
-To stop and disable firewalld, use:
-```
-> systemctl stop firewalld
-> systemctl disable firewalld
-Removed symlink /etc/systemd/system/dbus-org.fedoraproject.FirewallD1.service.
-Removed symlink /etc/systemd/system/basic.target.wants/firewalld.service.
-```
-NOTE: The firewall only needs to be disabled during install.  It gets enabled again on all members of the cluster/cloud after the install has completed.  
+*NOTE:* The firewall only needs to be disabled during install.  It gets enabled again on all members of the cluster after the install has completed.  
 
-*NOTE* If you are creating an ICP cluster with VMs (members) on more than one network segment/VLAN, then there may be physical firewalls that need to be configured to allow the ICP installation to proceed. See the ICP Knowledge Center section, [Default ports](https://www.ibm.com/support/knowledgecenter/SSBS6K_2.1.0/supported_system_config/required_ports.html), for the list of ports that must be open for installation and configuration of an ICP instance.
+*NOTE* In a scenario where an ICP cluster VMs (members) on more than one network segment/VLAN, then there may be physical firewalls that need to be configured to allow the ICP installation to proceed. See the ICP Knowledge Center section, [Default ports](https://www.ibm.com/support/knowledgecenter/SSBS6K_2.1.0/supported_system_config/required_ports.html), (TBD - Update this link) for the list of ports that must be open for installation and configuration of an ICP instance.
 
-## Some additional "boot master" pre-installation steps
+## Some additional boot-master pre-installation steps
 
-This section has some steps that need to be taken on the boot master before the actual installation command can be run.
+This section has some steps that need to be taken on the boot-master before the actual installation command can be run.
 
-*NOTE:* In these instructions, the root directory of the installation is referred to as `<ICP_HOME>`.  A common convention is to install ICP in a directory that includes the ICP version in the directory name, e.g., `/opt/icp2101`.
+*NOTE:* In these instructions, the root directory of the installation is referred to as `<ICP_HOME>`.  A common convention is to install ICP in a directory that includes the ICP version in the directory name, e.g., `/opt/icp2103`.
 
 - It is assumed that Docker is installed and running on the boot-master machine.
 - It is assumed that the ICP images archive has been loaded into the Docker registry on the boot-master machine. (*NOTE:* The actual archive file name may be different depending on the version of ICP you are installing.)
 ```
-tar -xf ibm-cloud-private-x86_64-2.1.0.1.tar.gz -O | docker load
+tar -xf ibm-cloud-private-x86_64-2.1.0.3.tar.gz -O | docker load
 ```
 - (On the boot-master) Extract the ICP boot meta-data to the `<ICP_HOME>/cluster` directory:
 ```
@@ -89,12 +79,12 @@ cp: overwrite ‘ssh_key’? y
 From `<ICP_HOME>/cluster`:
 ```
 > mkdir images
-> mv `<ICP_HOME>/ibm-cloud-private-x86_64-2.1.0.1.tar.gz` images
+> mv `<ICP_HOME>/ibm-cloud-private-x86_64-2.1.0.3.tar.gz` images
 ```
 
-Working with the config.yaml file is described in the next section.
+Working with the `config.yaml` file is described in the next section.
 
-## Configuring `config.yaml` on the boot master
+## Configuring `config.yaml` on the boot-master
 
 For information on the content of `config.yaml`, see the ICP KC section, [Cluster configuration settings](https://www.ibm.com/support/knowledgecenter/SSBS6K_2.1.0/installing/config_yaml.html).
 

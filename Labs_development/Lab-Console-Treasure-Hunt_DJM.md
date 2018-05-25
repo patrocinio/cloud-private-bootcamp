@@ -162,7 +162,7 @@ Locate the following information:
 
 3. Which **pod** is using the most memory currently?
 
-3. Which **pod** is using the most CPU currently?
+4. Which **pod** is using the most CPU currently?
 
 Close the Grafana browser tab
 

@@ -127,9 +127,9 @@ Microclimate requires two PVCs to function; one to store workspace data and anot
    kubectl create -f ./mc-jenkins-pvc.yaml
    ```
 
+5. Verify that the PVC have successfuly **Bound** to the PV by issuing the following command:
 
-
-5. Verify that the PVC have successfuly **Bound** to the PV by issuing the following command: `kubectl get pvc -n default`
+`kubectl get pvc -n default`
 
 ```
 # kubectl get pvc -n default
@@ -149,36 +149,13 @@ In this section you will deploy the Microclimate Helm Chart using the IBM Admin 
 
   | Parameter       | Value |
   | ------------- |-------------|
-  | Release name     | nodejs-sample |
-  | Target namespace      | helm-lab      |
-  | I have read and agreed to the License Agreements | yes      |
-  | Image tag | 8     |
-
-  Modify the following fields
-
-   <u>Under the Configuration Section</u>
-
-   ​	**Release name:** microclimate
-
-   ​	**Target namespace:** default (Note: Must be default)
-
-   ​	Accept the the license agreement
-
-   <u>Under the Persistence Section</u>
-
-   ​	**Existing PersistentVolumeClaim Name:** mc-workspace-pvc
-
-   ​	De-select  Dynamic Provisioning
-
-   <u>Under Jenkins Configuration Section</u>
-
-   ​  **Jenkins hostname:   jenkins.Team_IP_Address.nip.io
-
-   ​	**Jenkins - Existing PersistentVolumeClaim Name:** mc-jenkins-pvc
-
-   **Note:** In a standard ICP topology the Jenkins hostname should be the IP of the Proxy node and in an HA topology you would specify the Proxy node VIP.
-
-4. Click **Install**
+  | Release name  | microclimate |
+  | Target namespace  | default (Note: must be default) |
+  | I have read and agreed to the License Agreements | yes |
+  | Existing PersistentVolumeClaim Name | mc-workspace-pvc |
+  | Dynamic Provisioning | no |
+  | Jenkins hostname | jenkins.<icp-proxy-ip>.nip.io |
+  | Jenkins - Existing PersistentVolumeClaim Name | mc-jenkins-pvc |
 
 5. You can monitor the status of your deployment from the CLI. May take up to 5 minutes.
 

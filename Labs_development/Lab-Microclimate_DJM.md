@@ -264,11 +264,13 @@ In this section you will import an example NodeJS microservice project in to Mic
 
   ![Open App](images/microclimate/openapp2.jpg)
 
-15. Return to the **ICP Admin Console** and locate the **Deployment** and **Service** for your application.
+15. Return to the **ICP Admin Console** and locate the **Deployment** and **Service** for your application, note the **namespace** that they are deployed to.
 
 ### Create a Jenkins pipeline for the project <a name="jenkins"></a>
 
-1. Once the workspace loads Select the **Pipeline** view.
+1. Click on **Pipeline**.
+
+  ![Pipeline](images/microclimate/pipeline.jpg)
 
 2. Click **Create pipeline**
 
@@ -278,20 +280,19 @@ In this section you will import an example NodeJS microservice project in to Mic
 
 5. You should now see the message "The pipeline has been configured for this project". Click **Open pipeline**.
 
-6. The Jenkins interface should open and you should see a build in progress. Select the **Master** depolyment.
+6. The Jenkins interface should open and you can log in using **admin/admin**
+
+7. Once logged in, you should see a build in progress. Select the **Master** deployment.
 
 7. Monitor the Stage view until the build is complete. There will be three stages Extract, Docker build and Deploy. This make take up to 5 minutes to complete.
 
-8. Once the build process has completed. Open the ICP interface:
+  ![Jenkins Deploy](images/microclimate/jenkins-deploy.jpg)
 
-   https://*Team_IP_Address*:8443
+8. Once the build process has completed. Return to the ICP Admin Console and locate the newly created **Deployment** and **Service**. Note the different namespace.
 
-#### Verify the application deployment
+9. Use the **Launch** button on new Deployment to open a browser tab to the application.
 
-1. Once logged into the ICP interface navigate to **Network Access -> Services**.
-2. Search for *node* in the search bar and select the **node-service** in the **microclimate-pipeline-deployments** namespace.
-3. Click on the link next to the Node port field to open up the associated application.
-4. You should see the "*Hello world! This is a StarterKit!*" message confirming the application is running.
+
 
 
 ## End of Lab Exercise

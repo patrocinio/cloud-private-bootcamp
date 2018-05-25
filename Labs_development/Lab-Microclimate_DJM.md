@@ -6,7 +6,7 @@ Lab - Microclimate
 
 [2. Deploy the Microclimate Helm Chart](#deploychart)
 
-[3. Deploy the NodeJS Helm Chart using the Helm CLI](#cmdDeploy)
+[3. Import an example project in to Microclimate](#import)
 
 ## Overview
 In this lab exercise you will install **microclimate** in to your ICP Cluster and then work through developing applications from scratch and importing existing applications
@@ -117,7 +117,7 @@ Microclimate requires two PVCs to function; one to store workspace data and anot
          storage: 8Gi
     ```
 
-4. Create the Persistent Volumes and Persistent Volume Claims using the following commands:
+6. Create the Persistent Volumes and Persistent Volume Claims using the following commands:
 
    ```
    kubectl create -f ./mc-workspace-pv.yaml
@@ -129,7 +129,7 @@ Microclimate requires two PVCs to function; one to store workspace data and anot
    kubectl create -f ./mc-jenkins-pvc.yaml
    ```
 
-5. Verify that the PVC have successfuly **Bound** to the PV by issuing the following command:
+7. Verify that the PVC have successfuly **Bound** to the PV by issuing the following command:
 
 `kubectl get pvc -n default`
 
@@ -184,34 +184,61 @@ microclimate-ibm-microclimate-devops-86db55bd57-v76hd   1/1       Running   0   
 microclimate-jenkins-56766f9b49-slxtw                   1/1       Running   0          6m
 ```
 
-6. Once all the pods are running you can determine how microservice can be accessed.
+6. Once all the pods are running you can determine how Microclimate be accessed.  Execute the following commands to determine the Microclimate URL:
 
-   Execute the commands below to determine the Microclimate URL.
-
-```
+  ```
   export PORTAL_NODE_PORT=$(kubectl get svc microclimate-ibm-microclimate -o 'jsonpath={.spec.ports[?(@.name=="portal-http")].nodePort}')
+
   export NODE_IP=$(kubectl get nodes --namespace default -o jsonpath="{.items[0].status.addresses[0].address}")
+
   echo http://$NODE_IP:$PORTAL_NODE_PORT
-```
+  ```
 
 ​	Example output
 
-```
-root@yucca1:~# export PORTAL_NODE_PORT=$(kubectl get svc microclimate-ibm-microclimate -o 'jsonpath={.spec.ports[?(@.name=="portal-http")].nodePort}')
-root@yucca1:~#   export NODE_IP=$(kubectl get nodes --namespace default -o jsonpath="{.items[0].status.addresses[0].address}")
-root@yucca1:~#   echo http://$NODE_IP:$PORTAL_NODE_PORT
-http://9.30.51.175:31341
+  ```
+  # export PORTAL_NODE_PORT=$(kubectl get svc microclimate-ibm-microclimate -o 'jsonpath={.spec.ports[?(@.name=="portal-http")].nodePort}')
 
-```
+  # export NODE_IP=$(kubectl get nodes --namespace default -o jsonpath="{.items[0].status.addresses[0].address}")
 
-#### Importing a project into Microclimate
+  # echo http://$NODE_IP:$PORTAL_NODE_PORT
+  http://9.37.138.12:32192
 
-1. Open the URL from the output of the commands in your browser
-2. Read and accept the Microclimate license agreement and click **Accept**.
+  ```
 
-3. Select Import Project
-4. Enter "https://github.com/microclimate-demo/node" in Git field and click **Next**.
-5. Verify the Authentication required is not selected and click **Import**.
+7. Open the URL from the output of the commands in a new browser tab (for instance http://9.37.138.12:32192)
+
+8. Read and accept the Microclimate license agreement and click **Accept**.
+
+
+### Import an example project in to Microclimate <a name="import"></a>
+In this section you will import an example NodeJS microservice project in to Microclimate.
+
+1. Select Import Project
+
+2. Enter "https://github.com/microclimate-demo/node" in Git field and click **Next**.
+
+3. Verify that **Authentication required is not selected** and click **Import**.
+
+4. Once the project has been imported, the **Microclimate Dashboard** will be displayed. Click **Files** as shown below and open the **node** folder
+
+  ![Editor](images/microclimate/editor.jpg)
+
+5. Using the File Viewer, open `/node/public` and `/node/server` and review the source code for the sample application.
+
+6. Open the `health` endpoint (`/node/server/routers/health.js`) and note that it simply replies with `status: UP` whenever invoked. This endpoint is used by Kubernetes to determine whether the application is up and running or not.
+
+  ![Health](images/microclimate/health.jpg)
+
+7. Open `/node/public/index.html` and note that the page replies with a simple message. You will change this message later in the lab exercise
+
+  ![Index](images/microclimate/index.jpg)
+
+8. Open `/node/Dockerfile` and note that the Dockerfile first uses package.json to define the dependencies and later copies the application files in to the `/app` folder on the nodejs image  
+
+  ![Dockerfile](images/microclimate/dockerfile.jpg)
+
+9. Open `/node/Jenkinsfile` 
 
 
 

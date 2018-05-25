@@ -109,9 +109,13 @@ In this section you will deploy, test and then remove the NodeJS Sample Helm Cha
 
   ```
   cd /tmp
+
   mkdir nodejs-sample
+
   cd nodejs-sample
+
   git int
+
   git pull https://github.com/ibm-developer/icp-nodejs-sample
   ```
 
@@ -119,6 +123,7 @@ In this section you will deploy, test and then remove the NodeJS Sample Helm Cha
 
   ```
   cd chart/ibm-nodejs-sample
+  
   helm install --name nodejs-sample-cli --namespace nodejs-lab . --tls
   ```
 

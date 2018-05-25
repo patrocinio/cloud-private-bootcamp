@@ -16,7 +16,7 @@ In this section you will install Microclimate using the IBM provided Helm Chart
 
 #### Create secret and patch service account
 
-1. In a **terminal** session connected to your `master` node as the **root** user issue the following command to install the `kubectl` Kubernetes CLICreate a Docker registry secret in the default namespace:
+1. In a **terminal** session connected to your `master` node as the **root** user issue the following command to create a Docker registry secret in the default namespace:
 
    ```
    kubectl create secret docker-registry microclimate-registry-secret \
@@ -26,30 +26,30 @@ In this section you will install Microclimate using the IBM provided Helm Chart
      --docker-email=null
    ```
 
-
-
-2. Patch the service account
+2. Issue the following command to patch the service account
 
     ```
     kubectl patch serviceaccount default -p '{"imagePullSecrets": [{"name": "microclimate-registry-secret"}]}'
     ```
 
 #### Create Persistant Volumes (PV) and Persistant Volume Claims (PVC)
+Microclimate requires two PVCs to function; one to store workspace data and another for Jenkins. The following steps will walk you through the process of creating the PV and PVC.
 
-Microclimate requires two PVC to function one to store workspace data and another for Jenkins. The follwing steps will walk you through the process of creating the PV and PVC.
+**Note**: In this lab environment, the NFS Server is running on the icp-proxy node. In a *real* environment a dedicated NFS Server will probably exist.
 
-**Note:** In this lab we are using hostPath storage. This should only be used for testing and should not be used in a production environment.
-
-1. Create the directories that will be mapped to the PV
+1. In a **terminal** session connected to your `proxy` node as the **root** user issue the following command to create the directories that will be mapped to the PV
 
     ```
-    mkdir /mc-workspace
+    cd /storage
 
-    mkdir /mc-jenkins
+    mkdir mc-workspace
+
+    mkdir mc-jenkins
+
+    chmod 777 mc*
     ```
 
-2. Create the required Persistant Volumes
-   - Copy the following PV definition it a file named **mc-worspace-pv.yaml** on the system where you sourced your kubectl environment.
+2. In a **terminal** session connected to your `master` node as the **root** user, copy the following PV definition in to a file named **mc-worspace-pv.yaml** and change the **server IP address** (9.37.138.12) to the correct one for your environment.
 
     ```
     apiVersion: v1
@@ -62,11 +62,12 @@ Microclimate requires two PVC to function one to store workspace data and anothe
       persistentVolumeReclaimPolicy: Retain
       capacity:
         storage: 2Gi
-      hostPath:
-        path: /mc-workspace
+      nfs:
+        path: /storage/mc-workspace
+        server: 9.37.138.12
     ```
 
-   - Copy the following PV definition it a file named **mc-jenkins-pv.yaml** on the system where you sourced your kubectl environment.
+3. Copy the following PV definition in to a file named **mc-jenkins-pv.yaml** and change the **server IP address** (9.37.138.12) to the correct one for your environment.
 
     ```
     apiVersion: v1
@@ -79,15 +80,12 @@ Microclimate requires two PVC to function one to store workspace data and anothe
       persistentVolumeReclaimPolicy: Retain
       capacity:
         storage: 8Gi
-      hostPath:
-        path: /mc-jenkins
+      nfs:
+        path: /storage/mc-jenkins
+        server: 9.37.138.12
     ```
 
-
-
-3. Create Persistant Volume Claims
-
-   - Copy the following PV definition it a file named **mc-worspace-pvc.yaml** on the system where you sourced your kubectl environment.
+4. Copy the following PVC definition in to a a file named **mc-worspace-pvc.yaml**
 
     ```
    kind: PersistentVolumeClaim
@@ -102,7 +100,7 @@ Microclimate requires two PVC to function one to store workspace data and anothe
          storage: 2Gi
     ```
 
-   - Copy the following PV definition it a file named **mc-jenkins-pvc.yaml** on the system where you sourced your kubectl environment.
+5. Copy the following PVC definition in to a file named **mc-jenkins-pvc.yaml**
 
     ```
    kind: PersistentVolumeClaim
@@ -117,10 +115,10 @@ Microclimate requires two PVC to function one to store workspace data and anothe
          storage: 8Gi
     ```
 
-4. Create the Persistant Volumes and Persistant Volume Claims.
+4. Create the Persistent Volumes and Persistent Volume Claims using the following commands:
 
    ```
-   kubectl create -f ./mc-worspace-pv.yaml
+   kubectl create -f ./mc-workspace-pv.yaml
 
    kubectl create -f ./mc-jenkins-pv.yaml
 
@@ -131,12 +129,10 @@ Microclimate requires two PVC to function one to store workspace data and anothe
 
 
 
-5. Verify that the PVC have successfuly **Bound** to the PV.
-
-   Execute: kubectl get pvc -n default
+5. Verify that the PVC have successfuly **Bound** to the PV by issuing the following command: `kubectl get pvc -n default`
 
 ```
-root@trona1:~# kubectl get pvc -n default
+# kubectl get pvc -n default
 NAME               STATUS    VOLUME                 CAPACITY   ACCESS MODES   STORAGECLASS   AGE
 mc-jenkins-pvc     Bound     microclimate-jenkins   8Gi        RWO                      1m
 mc-workspace-pvc   Bound     mc-workspace           2Gi        RWO                     23s

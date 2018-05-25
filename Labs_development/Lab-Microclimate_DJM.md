@@ -224,45 +224,45 @@ In this section you will import an example NodeJS microservice project in to Mic
 
 4. Once the project has been imported, the **Microclimate Dashboard** will be displayed. Click **Files** as shown below and open the **node** folder
 
-  ![Editor](images/microclimate/editor.jpg)
+    ![Editor](images/microclimate/editor.jpg)
 
 5. Using the File Viewer, open `/node/public` and `/node/server` and review the source code for the sample application.
 
 6. Open the `health` endpoint (`/node/server/routers/health.js`) and note that it simply replies with `status: UP` whenever invoked. This endpoint is used by Kubernetes to determine whether the application is up and running or not.
 
-  ![Health](images/microclimate/health.jpg)
+    ![Health](images/microclimate/health.jpg)
 
 7. Open `/node/public/index.html` and note that the page replies with a simple message. You will change this message later in the lab exercise
 
-  ![Index](images/microclimate/index.jpg)
+    ![Index](images/microclimate/index.jpg)
 
 8. Open `/node/Dockerfile` and note that the Dockerfile first uses package.json to define the dependencies and later copies the application files in to the `/app` folder on the nodejs image  
 
-  ![Dockerfile](images/microclimate/dockerfile.jpg)
+    ![Dockerfile](images/microclimate/dockerfile.jpg)
 
 9. Open `/node/Jenkinsfile` and note that Jenkins will use the IBM provided and maintained `MicroserviceBuilder` library to handle the deployment
 
-  ![Jenkinsfile](images/microclimate/jenkinsfile.jpg)
+    ![Jenkinsfile](images/microclimate/jenkinsfile.jpg)
 
 10. By now the sample application should have been automatically deployed and started by Microclimate and the status in the top left of the screen should now by **Running**. If the status is still **Not running**, just wait a little longer...
 
-  ![Application is running](images/microclimate/running.jpg)
+    ![Application is running](images/microclimate/running.jpg)
 
 11. Click on **App Logs** to display the logs from the running container
 
-  ![Logs](images/microclimate/logs.jpg)
+    ![Logs](images/microclimate/logs.jpg)
 
 12. Click on **Open app** to open the application in the embedded browser. Note that the **Application URL** is displayed and you can copy it to a new browser tab outside of Microclimate and access the application directly.
 
-  ![Open App](images/microclimate/openapp1.jpg)
+    ![Open App](images/microclimate/openapp1.jpg)
 
 13. Click on **Edit code** and return to the `/node/public/index.html` file. Change the `Hello world! This is a StarterKit` line to a different value and save your changes.
 
-  ![New Index.html](images/microclimate/index2.jpg)
+    ![New Index.html](images/microclimate/index2.jpg)
 
 14. After a few seconds you should see the application status change to `Not running` and then soon after that back to `Running`. Microclimate has deployed the change to ICP. Click on **Open app** and view your change. Note that the Application URL has changed to use a new Port.
 
-  ![Open App](images/microclimate/openapp2.jpg)
+    ![Open App](images/microclimate/openapp2.jpg)
 
 15. Return to the **ICP Admin Console** and locate the **Deployment** and **Service** for your application, note the **namespace** that they are deployed to.
 
@@ -270,7 +270,7 @@ In this section you will import an example NodeJS microservice project in to Mic
 
 1. Click on **Pipeline**.
 
-  ![Pipeline](images/microclimate/pipeline.jpg)
+    ![Pipeline](images/microclimate/pipeline.jpg)
 
 2. Click **Create pipeline**
 
@@ -286,7 +286,7 @@ In this section you will import an example NodeJS microservice project in to Mic
 
 7. Monitor the Stage view until the build is complete. There will be three stages Extract, Docker build and Deploy. This make take up to 5 minutes to complete.
 
-  ![Jenkins Deploy](images/microclimate/jenkins-deploy.jpg)
+    ![Jenkins Deploy](images/microclimate/jenkins-deploy.jpg)
 
 8. Once the build process has completed. Return to the ICP Admin Console and locate the newly created **Deployment** and **Service**. Note the different namespace.
 

@@ -2,17 +2,17 @@ Lab - Microclimate
 ---
 
 ### Table of contents
-[1. Install Microclimate](#install)
+[1. Configure ICP for Microclimate](#configure)
 
-[2. Deploy the NodeJS Helm Chart using the ICP Console](#consoleDeploy)
+[2. Deploy the Microclimate Helm Chart](#deploychart)
 
 [3. Deploy the NodeJS Helm Chart using the Helm CLI](#cmdDeploy)
 
 ## Overview
 In this lab exercise you will install **microclimate** in to your ICP Cluster and then work through developing applications from scratch and importing existing applications
 
-### Install Microclimate <a name="install"></a>
-In this section you will install Microclimate using the IBM provided Helm Chart
+### Configure ICP for Microclimate <a name="configure"></a>
+In this section you will configure the environment for Microclimate
 
 #### Create secret and patch service account
 
@@ -49,7 +49,7 @@ Microclimate requires two PVCs to function; one to store workspace data and anot
     chmod 777 mc*
     ```
 
-2. In a **terminal** session connected to your `master` node as the **root** user, copy the following PV definition in to a file named **mc-worspace-pv.yaml** and change the **server IP address** (9.37.138.12) to the correct one for your environment.
+2. In a **terminal** session connected to your `master` node as the **root** user, copy the following PV definition in to a file named `mc-worspace-pv.yaml` and change the **server IP address** (9.37.138.12) to the correct one for your environment.
 
     ```
     apiVersion: v1
@@ -67,7 +67,7 @@ Microclimate requires two PVCs to function; one to store workspace data and anot
         server: 9.37.138.12
     ```
 
-3. Copy the following PV definition in to a file named **mc-jenkins-pv.yaml** and change the **server IP address** (9.37.138.12) to the correct one for your environment.
+3. Copy the following PV definition in to a file named `mc-jenkins-pv.yaml` and change the **server IP address** (9.37.138.12) to the correct one for your environment.
 
     ```
     apiVersion: v1
@@ -85,7 +85,7 @@ Microclimate requires two PVCs to function; one to store workspace data and anot
         server: 9.37.138.12
     ```
 
-4. Copy the following PVC definition in to a a file named **mc-worspace-pvc.yaml**
+4. Copy the following PVC definition in to a a file named `mc-worspace-pvc.yaml`
 
     ```
    kind: PersistentVolumeClaim
@@ -100,7 +100,7 @@ Microclimate requires two PVCs to function; one to store workspace data and anot
          storage: 2Gi
     ```
 
-5. Copy the following PVC definition in to a file named **mc-jenkins-pvc.yaml**
+5. Copy the following PVC definition in to a file named `mc-jenkins-pvc.yaml`
 
     ```
    kind: PersistentVolumeClaim
@@ -138,15 +138,23 @@ mc-jenkins-pvc     Bound     microclimate-jenkins   8Gi        RWO              
 mc-workspace-pvc   Bound     mc-workspace           2Gi        RWO                     23s
 ```
 
+### Deploy the Microclimate Helm Chart <a name="deploychart"></a>
+In this section you will deploy the Microclimate Helm Chart using the IBM Admin console
 
-
-#### Deploy Microclimate Helm Chart
-
-1. Navigate to the ICP Catalog **Catalog -> Helm Charts** and search for the microclimate chart.
+1. Click **Catalog** from the ICP Admin Console menu bar to navigate to the Catalog of Helm Charts and search for the `ibm-microclimate` chart.
 
 2. Click on the chart, read the overview and then click **Configure.**
 
-3. Modify the following fields
+3. Enter the following information (accept the defaults for all other values) and click **Install**:
+
+  | Parameter       | Value |
+  | ------------- |-------------|
+  | Release name     | nodejs-sample |
+  | Target namespace      | helm-lab      |
+  | I have read and agreed to the License Agreements | yes      |
+  | Image tag | 8     |
+
+  Modify the following fields
 
    <u>Under the Configuration Section</u>
 

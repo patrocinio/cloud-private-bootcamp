@@ -14,24 +14,24 @@ Lab - Install CLI and Tools
 In this lab exercise you will install the Kubernetes CLI, the IBM Cloud Private CLI and other useful tools.
 
 ### Install kubectl <a name="kubectl"></a>
-1) In a **terminal** session connected to your `master` node as the **root** user issue the following command to install the `kubectl` Kubernetes CLI
+1. In a **terminal** session connected to your `master` node as the **root** user issue the following command to install the `kubectl` Kubernetes CLI
 
 ```
 docker run -e LICENSE=accept --net=host -v /usr/local/bin:/data ibmcom/icp-inception:2.1.0.3-ee cp /usr/local/bin/kubectl /data
 ```
 
 ### Configure kubectl to connect to your ICP Cluster <a name="connect"></a>
-1) If you aren't already logged in to the ICP Admin Console from a previous exercise, open a browser and navigate to `https://<icp_master_ip>/8443` and log in using `username: admin` and `password: admin`
+1. If you aren't already logged in to the ICP Admin Console from a previous exercise, open a browser and navigate to `https://<icp_master_ip>/8443` and log in using `username: admin` and `password: admin`
 
-2) Click the **User** icon on the navigation bar and then select **Configure Client** to display the commands that are used to configure a kubectl command line to connect to this ICP Cluster.
+2. Click the **User** icon on the navigation bar and then select **Configure Client** to display the commands that are used to configure a kubectl command line to connect to this ICP Cluster.
 
 ![Configure Client](images/kubectl/configureclient.jpg)
 
-3) When the **Configure client** dialog is displayed, click the copy commands icon as shown below:
+3. When the **Configure client** dialog is displayed, click the copy commands icon as shown below:
 
 ![Copy Commands](images/kubectl/copycommands.jpg)
 
-4) Return to the terminal window and paste in the commands. The output will be similar to that shown below:
+4. Return to the terminal window and paste in the commands. The output will be similar to that shown below:
 
 ```
 # kubectl config set-cluster cluster.local --server=https://9.37.138.189:8001 --insecure-skip-tls-verify=true
@@ -50,7 +50,7 @@ Context "cluster.local-context" modified.
 Switched to context "cluster.local-context".
 ```
 
-5) Issue the following command to get information about your ICP Cluster: `kubectl cluster-info`
+5. Issue the following command to get information about your ICP Cluster: `kubectl cluster-info`
 
 ```
 # kubectl cluster-info

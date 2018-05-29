@@ -16,7 +16,7 @@ In this lab exercise you will install **microclimate** in to your ICP Cluster an
 ### Configure ICP for Microclimate <a name="configure"></a>
 In this section you will configure the environment for Microclimate
 
-#### Create secret and patch service account
+#### Create Docker secret and patch service account
 
 1. In a **terminal** session connected to your `master` node as the **root** user issue the following command to create a Docker registry secret in the default namespace:
 
@@ -33,6 +33,26 @@ In this section you will configure the environment for Microclimate
     ```
     kubectl patch serviceaccount default -p '{"imagePullSecrets": [{"name": "microclimate-registry-secret"}]}'
     ```
+
+#### Create Helm secret
+
+1. Issue the following commands to login to ICP and initialize Helm
+
+    ```
+    cd /root
+
+    bx pr login -a https://<icp_master_ip>:8443 --skip-ssl-validation
+    ```
+
+2. Issue the following command to create the Helm secret required by microclimate
+
+    ```
+    kubectl create secret generic microclimate-helm-secret \
+    --from-file=cert.pem=.helm/cert.pem \
+    --from-file=ca.pem=.helm/ca.pem \
+    --from-file=key.pem=.helm/key.pem
+    ```
+
 
 #### Create Persistant Volumes (PV) and Persistant Volume Claims (PVC)
 Microclimate requires two PVCs to function; one to store workspace data and another for Jenkins. The following steps will walk you through the process of creating the PV and PVC.
@@ -166,7 +186,15 @@ In this section you will deploy the Microclimate Helm Chart using the IBM Admin 
   | Existing PersistentVolumeClaim Name | mc-workspace-pvc |
   | Dynamic Provisioning | no |
 
+  In the **Microclimate** section:
+  **NOTE**: You must change the Jenkins hostname value to include your icp-proxy-ip address for instance: microclimate.9.37.138.12.nip.io
+
+  | Parameter       | Value |
+  | ------------- |-------------|
+  | Microclimate hostname | microclimate.icp-proxy-ip.nip.io |
+
   In the **Jenkins** section:
+  **NOTE**: You must change the Jenkins hostname value to include your icp-proxy-ip address for instance: jenkins.9.37.138.12.nip.io
 
   | Parameter       | Value |
   | ------------- |-------------|

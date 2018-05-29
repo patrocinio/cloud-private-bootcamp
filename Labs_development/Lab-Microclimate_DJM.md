@@ -171,8 +171,6 @@ In this section you will deploy the Microclimate Helm Chart using the IBM Admin 
 
 3. Enter the following information (accept the defaults for all other values) and click **Install**:
 
-**NOTE**: You must change the Jenkins hostname value to include your icp-proxy-ip address for instance: jenkins.9.37.138.12.nip.io
-
   | Parameter       | Value |
   | ------------- |-------------|
   | Release name  | microclimate |
@@ -214,31 +212,9 @@ microclimate-ibm-microclimate-devops-86db55bd57-v76hd   1/1       Running   0   
 microclimate-jenkins-56766f9b49-slxtw                   1/1       Running   0          6m
 ```
 
-6. Once all the pods are running you can determine how Microclimate be accessed.  Execute the following commands to determine the Microclimate URL:
+6. Once all the pods are running you can open a browser tab and navigate to http://microclimate.icp-proxy-ip.nip.io (replace icp-proxy-ip with your ICP Proxy IP Address for instance: microclimate.9.37.138.12.nip.io)
 
-  ```
-  export PORTAL_NODE_PORT=$(kubectl get svc microclimate-ibm-microclimate -o 'jsonpath={.spec.ports[?(@.name=="portal-http")].nodePort}')
-
-  export NODE_IP=$(kubectl get nodes --namespace default -o jsonpath="{.items[0].status.addresses[0].address}")
-
-  echo http://$NODE_IP:$PORTAL_NODE_PORT
-  ```
-
-​	Example output
-
-  ```
-  # export PORTAL_NODE_PORT=$(kubectl get svc microclimate-ibm-microclimate -o 'jsonpath={.spec.ports[?(@.name=="portal-http")].nodePort}')
-
-  # export NODE_IP=$(kubectl get nodes --namespace default -o jsonpath="{.items[0].status.addresses[0].address}")
-
-  # echo http://$NODE_IP:$PORTAL_NODE_PORT
-  http://9.37.138.12:32192
-
-  ```
-
-7. Open the URL from the output of the commands in a new browser tab (for instance http://9.37.138.12:32192)
-
-8. Read and accept the Microclimate license agreement and click **Accept**.
+7. Read and accept the Microclimate license agreement and click **Accept**.
 
 
 ### Import and test an example project in to Microclimate <a name="import"></a>
@@ -280,23 +256,29 @@ In this section you will import an example NodeJS microservice project in to Mic
 
     ![Logs](images/microclimate/logs.jpg)
 
-12. Click on **Open app** to open the application in the embedded browser. Note that the **Application URL** is displayed and you can copy it to a new browser tab outside of Microclimate and access the application directly.
+12. Click on **Open app** to open the application in a new browser tab
 
-    ![Open App](images/microclimate/openapp1.jpg)
+    ![Open App](images/microclimate/open_app1.jpg)
 
-13. Click on **Edit code** and return to the `/node/public/index.html` file. Change the `Hello world! This is a StarterKit` line to a different value and save your changes.
+13. Close the browser tab and return to the Microclimate dashboard. Click on **Edit code** and return to the `/node/public/index.html` file. Change the `Hello world! This is a StarterKit` line to a different value and save your changes.
 
     ![New Index.html](images/microclimate/index2.jpg)
 
 14. After a few seconds you should see the application status change to `Not running` and then soon after that back to `Running`. Microclimate has deployed the change to ICP. Click on **Open app** and view your change. Note that the Application URL has changed to use a new Port.
 
-    ![Open App](images/microclimate/openapp2.jpg)
+    ![Open App](images/microclimate/open_app2.jpg)
+
+15. Close the browser tab and return to the Microclimate dashboard. Click on the **Run Load** button in the top right corner of the page to start a **Load Test**
+
+16. Click on **App monitor** to open the application monitoring page. After a few seconds requests will start to be processed by the application and show in the graphs. The load test will run for a short time.
+
+    ![App Mon](images/microclimate/appmon.jpg)
 
 15. Return to the **ICP Admin Console** and locate the **Deployment** and **Service** for your application, note the **namespace** that they are deployed to.
 
 ### Create a Jenkins pipeline for the project <a name="jenkins"></a>
 
-1. Click on **Pipeline**.
+1. Return to the Microclimate Dashboard and click on **Pipeline**.
 
     ![Pipeline](images/microclimate/pipeline.jpg)
 
@@ -308,9 +290,9 @@ In this section you will import an example NodeJS microservice project in to Mic
 
 5. You should now see the message "The pipeline has been configured for this project". Click **Open pipeline**.
 
-6. The Jenkins interface should open and you can log in using **admin/admin**
+6. You may be shown the ICP Admin Console login page, login using **admin/admin**
 
-7. Once logged in, you should see a build in progress. Select the **Master** deployment.
+7. Once logged in, you should be routed to Jenkins and see a build in progress. Select the **Master** deployment.
 
 7. Monitor the Stage view until the build is complete. There will be three stages Extract, Docker build and Deploy. This make take up to 5 minutes to complete.
 
@@ -320,7 +302,7 @@ In this section you will import an example NodeJS microservice project in to Mic
 
 9. Use the **Launch** button on new Deployment to open a browser tab to the application.
 
-
+10. Close the browser tabs for the **application** and the **Microclimate Dashboard**
 
 
 ## End of Lab Exercise

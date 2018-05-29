@@ -91,9 +91,11 @@ In this section you will deploy, test and then remove the NodeJS Sample Helm Cha
 
 2. Configure the kubectl command line to connect to your ICP Cluster (Click the **User** icon on the navigation bar in the ICP Admin Console and then select **Configure Client** and copy the commands and paste them in to the terminal window
 
-3. Issue the following command to login the ICP CLI in to your ICP Cluster.  
+3. Issue the following commands to login the ICP CLI in to your ICP Cluster.  
 
   ```
+  cd /root
+
   bx pr login -a https://<icp_master_ip>:8443 --skip-ssl-validation
   ```
 
@@ -123,7 +125,7 @@ In this section you will deploy, test and then remove the NodeJS Sample Helm Cha
 
   ```
   cd chart/ibm-nodejs-sample
-  
+
   helm install --name nodejs-sample-cli --namespace nodejs-lab . --tls
   ```
 

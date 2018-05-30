@@ -73,8 +73,20 @@ When you first access the Kibana GUI you are prompted to create an Index Pattern
 
   ![Discover](images/logging101/discover.jpg)
 
-3. In the search box, enter ```kubernetes.namespace: nodejs-lab``` to see the logs for the nodejs sample
+#### View the logs for the nodejs sample
+Now you will use Kibana to view the logs for the nodejs sample and modify the fields that are displayed on the screen
+
+1. In the search box, enter ```kubernetes.namespace: nodejs-lab``` to see the logs for the nodejs sample
 
   ![NodeJS Logs](images/logging101/nodejs.jpg)
+
+2. Now you will modify the fields that are shown on the screen. Click the **Settings icon** on the **Available Fields** line and add the following fields: ``` kubernetes.container_name, log, stream ```
+
+  ![NodeJS Log Fields](images/logging101/fields.jpg)
+
+#### Import a Dashboard and some Visualizations
+In this section you will import some basic visualizations and a dashboard that demonstrate some of the capabilities of Kibana
+
+
 
 ## End of Lab Exercise

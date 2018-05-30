@@ -304,5 +304,10 @@ In this section you will import an example NodeJS microservice project in to Mic
 
 10. Close the browser tabs for the **application** and the **Microclimate Dashboard**
 
+#### End of Lab Review
+In this lab exercise you have been introduced to Microclimate in IBM Cloud Private:
+- Configured IBM Cloud Private for Microclimate and deployed the Microclimate Helm Chart
+- Imported, reviewed and tested an example cloud-native application
+- Created a Jenkins Pipeline and deployed the application to IBM Cloud Private
 
 ## End of Lab Exercise

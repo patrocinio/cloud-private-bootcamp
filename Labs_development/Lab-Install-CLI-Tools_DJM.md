@@ -169,7 +169,7 @@ The **Kebernetes CLI** is now installed and will be used later in the workshop
 
   ```
   cd /tmp
-  
+
   docker run -e LICENSE=accept --net=host -v /usr/local/bin:/data ibmcom/icp-helm-api:1.0.0 cp /usr/src/app/public/cli/linux-amd64/helm /data
   ```
 
@@ -219,5 +219,10 @@ The **Kebernetes CLI** is now installed and will be used later in the workshop
 
   The **Helm CLI** is now installed and will be used later in the workshop
 
+#### End of Lab Review
+  In this lab exercise you have been installed and configured some of the command line tools that can be used with IBM Cloud Private:
+  - Installed kubectl and configured it for use with your ICP Cluster
+  - Installed the IBM Cloud CLI
+  - Installed the Helm CLI
 
 ## End of Lab Exercise

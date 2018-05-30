@@ -164,4 +164,10 @@ In this section you will deploy, test and then remove the NodeJS Sample Helm Cha
   helm delete --purge nodejs-sample-cli --tls
   ```
 
+#### End of Lab Review
+  In this lab exercise you have deployed your first Helm Charts:
+  - Created a new Kubernetes namespaces
+  - Deployed the NodeJS Helm Chart from the ICP Admin console
+  - Deployed the NodeJS Helm Chart using the Helm CLI
+
 ## End of Lab Exercise

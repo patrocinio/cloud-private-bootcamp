@@ -157,9 +157,10 @@ In this section you will deploy, test and then remove the NodeJS Sample Helm Cha
 
 12. Return to the **ICP Admin Console**, navigate to the **Helm Releases** page and validate that the **nodejs-sample-cli** Helm Release is displayed. Drill-down and validate that the **Port** for the Service is the same as the what was returned by the CLI
 
-13. Issue the following commands to remove the NodeJS Sample Helm Chart
+13. The command to remove the NodeJS Sample Helm Chart is shown below, however, you will use it again in the Logging Lab so it will be left running at this time.
 
   ```
+  NOTE: DO NOT ISSUE THIS COMMAND AT THIS TIME, IT IS HERE FOR REFERENCE ONLY
   helm delete --purge nodejs-sample-cli --tls
   ```
 

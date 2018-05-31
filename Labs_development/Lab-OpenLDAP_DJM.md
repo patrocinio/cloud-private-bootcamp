@@ -6,8 +6,6 @@ Lab - Configuring IBM Cloud Private to use OpenLDAP
 
 [2. Integrate IBM Cloud Private with OpenLDAP](#integrate)
 
-[3. Dashboard](#dashboard)
-
 ## Overview
 In this lab exercise you will deploy to IBM Cloud Private a standalone OpenLDAP Docker Container that has been pre-configured with some users and groups. Later, you will configure IBM Cloud Private to use the OpenLDAP instance that you deployed.
 
@@ -471,22 +469,16 @@ In this section you will configure IBM Cloud Private to use the OpenLDAP server 
 #### Create Namespaces
 To prevent our different groups from being able to view or modify each other's resources we will want to create some level of isolation. To do this we will create namespaces that we can associate with our Teams.
 
-1. Execute the following commands to create ICP namespaces.
+1. Execute the following command to create an ICP namespace.
 
    ```
-   kubectl create namespace developers
-
-   kubectl create namespace operations
-
-   kubectl create namespace support
+   kubectl create namespace ldap-lab
    ```
 
+#### Create Teams
+In the section we will work through the process of creating teams in ICP and assigning them roles. These teams will be based on the LDAP groups that were defined in our OpenLDAP container.
 
-
-### Create Teams
-In the section we will work through the process of creating teams in ICP and assigning them roles. These teams will be based on the LDAP groups that were defined in out OpenLDAP container.
-
-1. Navigate to **Manage -> Teams** in the ICP browser interface.
+1. In the ICP Admin Console click **Manage -> Teams**
 
 2. Click **Create team**
 
@@ -498,6 +490,8 @@ In the section we will work through the process of creating teams in ICP and ass
 
 5. Grant the developer team ***Editor*** access.
 
+  ![Developers](images/ldap/developers.jpg)
+
 6. Click **Create**.
 
 7. Once the team is created select the team you created from the *Teams* list.
@@ -506,44 +500,67 @@ In the section we will work through the process of creating teams in ICP and ass
 
 9. Click **Add resources**
 
-10. From the list of namespaces select *developers* and click **Add**.
+10. From the list of namespaces select *ldap-lab*
 
-Repeat the process to create two more teams with the values below.
+  ![Resources](images/ldap/resources.jpg)
 
-| Team Name  | LDAP Group | Role     | Namespace  |
-| ---------- | ---------- | -------- | ---------- |
-| operations | operations | operator | operations |
-| support    | support    | viewer   | support    |
+11. Click **Add**.
 
-# Validate the Users
+  Repeat the process to create two more teams with the values below.
 
+  | Team Name  | LDAP Group | Role     | Namespace  |
+  | ---------- | ---------- | -------- | ---------- |
+  | operations | operations | operator | ldap-lab |
+  | support    | support    | viewer   | ldap-lab    |
+
+  When you are finished you should have three **Teams**
+
+  ![Teams](images/ldap/teams.jpg)  
+
+#### Validate the Users
 In this section we are going to explore the differences between the groups we created. Follow the steps below to explore the differences between the roles assigned to the different groups.
 
-1. Login as a user from each of the teams you defined and explore the differences between the different roles.
-2. Create an empty ConfigMap object using each user
+1. Log out of the ICP Administration Console
 
-​	Are you able to see the config maps from other users?
+2. Log in as a member of the **developers** team that has **editor** rights, for instance `todd` with password: `Passw0rd`
 
-​	Can you see any deployments?
+3. Check to see whether you can see any existing **Deployments**, **ConfigMaps** or other artifacts.  Note that the `ldap-lab` namespace is empty and `todd` can't see artifacts in other namespaces, also `todd` can't create anything.
 
+4. Log out of the ICP Administration Console
 
+5. Log in as a member of the **support** team that has **viewer** rights, for instance `carlos` with password: `Passw0rd`
 
+6. Check to see whether you can see any existing **Deployments**, **ConfigMaps** or other artifacts. Note that the `ldap-lab` namespace is empty and `carlos` can't see artifacts in other namespaces, also `carlos` can't create anything.
 
+7. Log out of the ICP Administration Console
 
+8. Log in as a member of the **operations** team that has **operator** rights, for instance `bob` with password: `Passw0rd`
 
+9. Check to see whether you can see any existing **Deployments**, **ConfigMaps** or other artifacts. Note that the `ldap-lab` namespace is empty and `bob` can't see artifacts in other namespaces, also note that `bob` has access to create Deployemnts and ConfigMaps
 
+10. Create an simple **ConfigMap** with one name/value pair such as the one below
 
+  ![ConfigMap](images/ldap/createmap.jpg)
 
+11. Log out of the ICP Administration Console
 
+12. Log in as a member of the **developers** team that has **editor** rights, for instance `todd` with password: `Passw0rd`
 
+13. Can you see the **ConfigMap**? Can you change it?
 
+14. Log out of the ICP Administration Console
 
+15. Log in as a member of the **support** team that has **viewer** rights, for instance `carlos` with password: `Passw0rd`
+
+13. Can you see the **ConfigMap**? Can you change it?
+
+14. Log out of the ICP Administration Console
 
 #### End of Lab Review
-  In this lab exercise you became familiar with the IBM Cloud Private Administration Console by completing a Treasure Hunt. You learned about:
-  - The ICP Admin Console dashboard.
-  - Nodes and Namespaces, Deployments, StatefulSets, DaemonSets, Services and Ingress
-  - Helm Charts.
-  - Storage, Monitoring and Alerts
+  In this lab exercise you became familiar with Role Based Access Control in IBM Cloud Private. You learned about:
+  - Deploying OpenLDAP in a container for testing purposes.
+  - Configuring IBM Cloud Private to connect to LDAP
+  - Creating Teams and assigning Resources
+  - The different types of access control that are available in IBM Cloud Private
 
 ## End of Lab Exercise

@@ -4,7 +4,7 @@ Lab - Configuring IBM Cloud Private to use OpenLDAP
 ### Table of contents
 [1. Deploying and Testing OpenLDAP](#deploytest)
 
-[2. Getting Started](#gettingstarted)
+[2. Integrate IBM Cloud Private with OpenLDAP](#integrate)
 
 [3. Dashboard](#dashboard)
 
@@ -103,25 +103,25 @@ In this section you will create a Kubernetes **Deployment** and a Kubernetes **S
 
 4. Copy the following **Service** definition in to a file named **openldap-service.yml**
 
-  ```
-  apiVersion: v1
-  kind: Service
-  metadata:
-    labels:
-      app: ldap
-    name: ldap-service
-  spec:
-    ports:
-      - port: 389
-    selector:
-      app: ldap
-  ```
+    ```
+    apiVersion: v1
+    kind: Service
+    metadata:
+      labels:
+        app: ldap
+      name: ldap-service
+    spec:
+      ports:
+        - port: 389
+      selector:
+        app: ldap
+    ```
 
 4. Excute the following kubectl commands to create the **Deployment** and **Service**:
 
-   `kubectl create -f ./openldap-deployment.yml`
+  `kubectl create -f ./openldap-deployment.yml`
 
-   `kubectl create -f ./openldap-service.yml`
+  `kubectl create -f ./openldap-service.yml`
 
   Example output
   ```
@@ -133,269 +133,404 @@ In this section you will create a Kubernetes **Deployment** and a Kubernetes **S
 
 5. Verify the pod is running with the following command:
 
-   `kubectl get po`
+  `kubectl get po`
 
-   Example output
+  Example output
 
-```
-[root@pit-icp-master-01 ~]# kubectl get po
-NAME                    READY     STATUS    RESTARTS   AGE
-ldap-64745886dd-ljfdr   1/1       Running   0          2m
-```
+  ```
+  # kubectl get po
+  NAME                    READY     STATUS    RESTARTS   AGE
+  ldap-64745886dd-ljfdr   1/1       Running   0          2m
+  ```
 
-
-
-6. Using the pod name from the previous command now lets describe the pod with the command below:
+6. Using the **pod name** from the previous command issue the following command to **describe the pod**:
 
    `kubectl describe po <pod_name>`
 
    Example output
 
-```
-[root@pit-icp-master-01 ~]# kubectl describe po ldap-64745886dd-ljfdr
-Name:           ldap-64745886dd-ljfdr
-Namespace:      default
-Node:           pit-icp-worker-02/172.16.3.24
-Start Time:     Thu, 10 May 2018 23:56:31 -0400
-Labels:         app=ldap
-                pod-template-hash=2030144288
-Annotations:    kubernetes.io/psp=default
-Status:         Running
-IP:             10.1.99.197
-Controlled By:  ReplicaSet/ldap-64745886dd
-Containers:
-  ldap:
-    Container ID:   docker://b82c6ee4983e8c664b07ac06a2773639de30e18e3fc23a356649cb2752d689a5
-    Image:          johnowebb/openldap:latest
-    Image ID:       docker-pullable://johnowebb/openldap@sha256:1fa63e2849d7a75389beedbdcd660e46029d6a777c9ac22f01693076910164a2
-    Port:           389/TCP
-    Host Port:      0/TCP
-    State:          Running
-      Started:      Thu, 10 May 2018 23:56:46 -0400
-    Ready:          True
-    Restart Count:  0
-    Environment:    <none>
-    Mounts:
-      /var/run/secrets/kubernetes.io/serviceaccount from default-token-2sn5d (ro)
-Conditions:
-  Type           Status
-  Initialized    True
-  Ready          True
-  PodScheduled   True
-Volumes:
-  default-token-2sn5d:
-    Type:        Secret (a volume populated by a Secret)
-    SecretName:  default-token-2sn5d
-    Optional:    false
-QoS Class:       BestEffort
-Node-Selectors:  <none>
-Tolerations:     node.kubernetes.io/not-ready:NoExecute for 300s
-                 node.kubernetes.io/unreachable:NoExecute for 300s
-Events:
-  Type    Reason                 Age   From                        Message
-  ----    ------                 ----  ----                        -------
-  Normal  Scheduled              5m    default-scheduler           Successfully assigned ldap-64745886dd-ljfdr to pit-icp-worker-02
-  Normal  SuccessfulMountVolume  5m    kubelet, pit-icp-worker-02  MountVolume.SetUp succeeded for volume "default-token-2sn5d"
-  Normal  Pulling                5m    kubelet, pit-icp-worker-02  pulling image "johnowebb/openldap:latest"
-  Normal  Pulled                 5m    kubelet, pit-icp-worker-02  Successfully pulled image "johnowebb/openldap:latest"
-  Normal  Created                5m    kubelet, pit-icp-worker-02  Created container
-  Normal  Started                5m    kubelet, pit-icp-worker-02  Started container
-```
+  ```
+  # kubectl describe po ldap-64745886dd-ljfdr
+  Name:           ldap-64745886dd-ljfdr
+  Namespace:      default
+  Node:           pit-icp-worker-02/172.16.3.24
+  Start Time:     Thu, 10 May 2018 23:56:31 -0400
+  Labels:         app=ldap
+                  pod-template-hash=2030144288
+  Annotations:    kubernetes.io/psp=default
+  Status:         Running
+  IP:             10.1.99.197
+  Controlled By:  ReplicaSet/ldap-64745886dd
+  Containers:
+    ldap:
+      Container ID:   docker://b82c6ee4983e8c664b07ac06a2773639de30e18e3fc23a356649cb2752d689a5
+      Image:          johnowebb/openldap:latest
+      Image ID:       docker-pullable://johnowebb/openldap@sha256:1fa63e2849d7a75389beedbdcd660e46029d6a777c9ac22f01693076910164a2
+      Port:           389/TCP
+      Host Port:      0/TCP
+      State:          Running
+        Started:      Thu, 10 May 2018 23:56:46 -0400
+      Ready:          True
+      Restart Count:  0
+      Environment:    <none>
+      Mounts:
+        /var/run/secrets/kubernetes.io/serviceaccount from default-token-2sn5d (ro)
+  Conditions:
+    Type           Status
+    Initialized    True
+    Ready          True
+    PodScheduled   True
+  Volumes:
+    default-token-2sn5d:
+      Type:        Secret (a volume populated by a Secret)
+      SecretName:  default-token-2sn5d
+      Optional:    false
+  QoS Class:       BestEffort
+  Node-Selectors:  <none>
+  Tolerations:     node.kubernetes.io/not-ready:NoExecute for 300s
+                   node.kubernetes.io/unreachable:NoExecute for 300s
+  Events:
+    Type    Reason                 Age   From                        Message
+    ----    ------                 ----  ----                        -------
+    Normal  Scheduled              5m    default-scheduler           Successfully assigned ldap-64745886dd-ljfdr to pit-icp-worker-02
+    Normal  SuccessfulMountVolume  5m    kubelet, pit-icp-worker-02  MountVolume.SetUp succeeded for volume "default-token-2sn5d"
+    Normal  Pulling                5m    kubelet, pit-icp-worker-02  pulling image "johnowebb/openldap:latest"
+    Normal  Pulled                 5m    kubelet, pit-icp-worker-02  Successfully pulled image "johnowebb/openldap:latest"
+    Normal  Created                5m    kubelet, pit-icp-worker-02  Created container
+    Normal  Started                5m    kubelet, pit-icp-worker-02  Started container
+  ```
 
-7. Now let's  verify that the ldap server is responding and that our ldap user and groups are available.
+7. Enter the following command to get the **Cluster IP** that has been assigned to the **Service**. You will use this value later in the lab Exercise
 
-   First let's connect to the pod with an interactive shell:
+  `kubectl describe service ldap-service`
+
+  Example output (in this case the **Cluster IP** is **10.0.0.2**):
+
+  ```
+  # kubectl describe service ldap-service
+  Name:              ldap-service
+  Namespace:         default
+  Labels:            app=ldap
+  Annotations:       <none>
+  Selector:          app=ldap
+  Type:              ClusterIP
+  IP:                10.0.0.2
+  Port:              <unset>  389/TCP
+  TargetPort:        389/TCP
+  Endpoints:         10.1.116.198:389
+  Session Affinity:  None
+  Events:            <none>
+  ```
+
+
+8. In order to verify that the ldap server is responding and that the ldap user and groups are available, you will now connect to the pod with an interactive shell using the following command:
 
    `kubectl exec <pod_name> -it bash`
 
-   Then execute the following command:
+   Example output (note that you are now inside the container as the root user):
 
-    `ldapsearch -x -h localhost -b dc=ibm,dc=com -D "cn=admin,dc=ibm,dc=com" -w Passw0rd`
+   ```
+   # kubectl exec ldap-6b4898575b-q9qrw -it bash
+   root@ldap-6b4898575b-q9qrw:/#
+
+   ```
+
+9. Now execute the following command to perform an **ldapsearch**:
+
+  `ldapsearch -x -h localhost -b dc=ibm,dc=com -D "cn=admin,dc=ibm,dc=com" -w Passw0rd`
 
 	Example output
 
-```
-# extended LDIF
-#
-# LDAPv3
-# base <dc=ibm,dc=com> with scope subtree
-# filter: (objectclass=*)
-# requesting: ALL
-#
+  ```
+  # extended LDIF
+  #
+  # LDAPv3
+  # base <dc=ibm,dc=com> with scope subtree
+  # filter: (objectclass=*)
+  # requesting: ALL
+  #
 
-# ibm.com
-dn: dc=ibm,dc=com
-objectClass: top
-objectClass: dcObject
-objectClass: organization
-o: IBM
-dc: ibm
+  # ibm.com
+  dn: dc=ibm,dc=com
+  objectClass: top
+  objectClass: dcObject
+  objectClass: organization
+  o: IBM
+  dc: ibm
 
-# admin, ibm.com
-dn: cn=admin,dc=ibm,dc=com
-objectClass: simpleSecurityObject
-objectClass: organizationalRole
-cn: admin
-description: LDAP administrator
-userPassword:: e1NTSEF9bitWdGJvZ2RIcXhNbTVDM0tZNTZrY1ByTHcxWHJQM0U=
+  # admin, ibm.com
+  dn: cn=admin,dc=ibm,dc=com
+  objectClass: simpleSecurityObject
+  objectClass: organizationalRole
+  cn: admin
+  description: LDAP administrator
+  userPassword:: e1NTSEF9bitWdGJvZ2RIcXhNbTVDM0tZNTZrY1ByTHcxWHJQM0U=
 
-# users, ibm.com
-dn: ou=users,dc=ibm,dc=com
-objectClass: organizationalUnit
-description: All users in organization
-ou: users
+  # users, ibm.com
+  dn: ou=users,dc=ibm,dc=com
+  objectClass: organizationalUnit
+  description: All users in organization
+  ou: users
 
-# groups, ibm.com
-dn: ou=groups,dc=ibm,dc=com
-objectClass: organizationalUnit
-objectClass: top
-ou: groups
+  # groups, ibm.com
+  dn: ou=groups,dc=ibm,dc=com
+  objectClass: organizationalUnit
+  objectClass: top
+  ou: groups
 
-# todd, users, ibm.com
-dn: uid=todd,ou=users,dc=ibm,dc=com
-objectClass: inetOrgPerson
-objectClass: organizationalPerson
-objectClass: person
-objectClass: top
-cn: toddCN
-sn: toddSN
-uid: todd
-userPassword:: UGFzc3cwcmQ=
+  # todd, users, ibm.com
+  dn: uid=todd,ou=users,dc=ibm,dc=com
+  objectClass: inetOrgPerson
+  objectClass: organizationalPerson
+  objectClass: person
+  objectClass: top
+  cn: toddCN
+  sn: toddSN
+  uid: todd
+  userPassword:: UGFzc3cwcmQ=
 
-# james, users, ibm.com
-dn: uid=james,ou=users,dc=ibm,dc=com
-objectClass: inetOrgPerson
-objectClass: organizationalPerson
-objectClass: person
-objectClass: top
-cn: jamesCN
-sn: jamesSN
-uid: james
-userPassword:: UGFzc3cwcmQ=
+  # james, users, ibm.com
+  dn: uid=james,ou=users,dc=ibm,dc=com
+  objectClass: inetOrgPerson
+  objectClass: organizationalPerson
+  objectClass: person
+  objectClass: top
+  cn: jamesCN
+  sn: jamesSN
+  uid: james
+  userPassword:: UGFzc3cwcmQ=
 
-# sarah, users, ibm.com
-dn: uid=sarah,ou=users,dc=ibm,dc=com
-objectClass: inetOrgPerson
-objectClass: organizationalPerson
-objectClass: person
-objectClass: top
-cn: sarahCN
-sn: sarahSN
-uid: sarah
-userPassword:: UGFzc3cwcmQ=
+  # sarah, users, ibm.com
+  dn: uid=sarah,ou=users,dc=ibm,dc=com
+  objectClass: inetOrgPerson
+  objectClass: organizationalPerson
+  objectClass: person
+  objectClass: top
+  cn: sarahCN
+  sn: sarahSN
+  uid: sarah
+  userPassword:: UGFzc3cwcmQ=
 
-# bob, users, ibm.com
-dn: uid=bob,ou=users,dc=ibm,dc=com
-objectClass: inetOrgPerson
-objectClass: organizationalPerson
-objectClass: person
-objectClass: top
-cn: bobCN
-sn: bobSN
-uid: bob
-userPassword:: UGFzc3cwcmQ=
+  # bob, users, ibm.com
+  dn: uid=bob,ou=users,dc=ibm,dc=com
+  objectClass: inetOrgPerson
+  objectClass: organizationalPerson
+  objectClass: person
+  objectClass: top
+  cn: bobCN
+  sn: bobSN
+  uid: bob
+  userPassword:: UGFzc3cwcmQ=
 
-# laura, users, ibm.com
-dn: uid=laura,ou=users,dc=ibm,dc=com
-objectClass: inetOrgPerson
-objectClass: organizationalPerson
-objectClass: person
-objectClass: top
-cn: lauraCN
-sn: lauraSN
-uid: laura
-userPassword:: UGFzc3cwcmQ=
+  # laura, users, ibm.com
+  dn: uid=laura,ou=users,dc=ibm,dc=com
+  objectClass: inetOrgPerson
+  objectClass: organizationalPerson
+  objectClass: person
+  objectClass: top
+  cn: lauraCN
+  sn: lauraSN
+  uid: laura
+  userPassword:: UGFzc3cwcmQ=
 
-# josie, users, ibm.com
-dn: uid=josie,ou=users,dc=ibm,dc=com
-objectClass: inetOrgPerson
-objectClass: organizationalPerson
-objectClass: person
-objectClass: top
-cn: josieCN
-sn: josieSN
-uid: josie
-userPassword:: UGFzc3cwcmQ=
+  # josie, users, ibm.com
+  dn: uid=josie,ou=users,dc=ibm,dc=com
+  objectClass: inetOrgPerson
+  objectClass: organizationalPerson
+  objectClass: person
+  objectClass: top
+  cn: josieCN
+  sn: josieSN
+  uid: josie
+  userPassword:: UGFzc3cwcmQ=
 
-# carlos, users, ibm.com
-dn: uid=carlos,ou=users,dc=ibm,dc=com
-objectClass: inetOrgPerson
-objectClass: organizationalPerson
-objectClass: person
-objectClass: top
-cn: carlosCN
-sn: carlosSN
-uid: carlos
-userPassword:: UGFzc3cwcmQ=
+  # carlos, users, ibm.com
+  dn: uid=carlos,ou=users,dc=ibm,dc=com
+  objectClass: inetOrgPerson
+  objectClass: organizationalPerson
+  objectClass: person
+  objectClass: top
+  cn: carlosCN
+  sn: carlosSN
+  uid: carlos
+  userPassword:: UGFzc3cwcmQ=
 
-# jackie, users, ibm.com
-dn: uid=jackie,ou=users,dc=ibm,dc=com
-objectClass: inetOrgPerson
-objectClass: organizationalPerson
-objectClass: person
-objectClass: top
-cn: jackieCN
-sn: jackieSN
-uid: jackie
-userPassword:: UGFzc3cwcmQ=
+  # jackie, users, ibm.com
+  dn: uid=jackie,ou=users,dc=ibm,dc=com
+  objectClass: inetOrgPerson
+  objectClass: organizationalPerson
+  objectClass: person
+  objectClass: top
+  cn: jackieCN
+  sn: jackieSN
+  uid: jackie
+  userPassword:: UGFzc3cwcmQ=
 
-# tony, users, ibm.com
-dn: uid=tony,ou=users,dc=ibm,dc=com
-objectClass: inetOrgPerson
-objectClass: organizationalPerson
-objectClass: person
-objectClass: top
-cn: tonyCN
-sn: tonySN
-uid: tony
-userPassword:: UGFzc3cwcmQ=
+  # tony, users, ibm.com
+  dn: uid=tony,ou=users,dc=ibm,dc=com
+  objectClass: inetOrgPerson
+  objectClass: organizationalPerson
+  objectClass: person
+  objectClass: top
+  cn: tonyCN
+  sn: tonySN
+  uid: tony
+  userPassword:: UGFzc3cwcmQ=
 
-# developers, groups, ibm.com
-dn: cn=developers,ou=groups,dc=ibm,dc=com
-objectClass: groupOfUniqueNames
-objectClass: top
-cn: developers
-uniqueMember: uid=todd,ou=users,dc=ibm,dc=com
-uniqueMember: uid=james,ou=users,dc=ibm,dc=com
-uniqueMember: uid=sarah,ou=users,dc=ibm,dc=com
+  # developers, groups, ibm.com
+  dn: cn=developers,ou=groups,dc=ibm,dc=com
+  objectClass: groupOfUniqueNames
+  objectClass: top
+  cn: developers
+  uniqueMember: uid=todd,ou=users,dc=ibm,dc=com
+  uniqueMember: uid=james,ou=users,dc=ibm,dc=com
+  uniqueMember: uid=sarah,ou=users,dc=ibm,dc=com
 
-# operations, groups, ibm.com
-dn: cn=operations,ou=groups,dc=ibm,dc=com
-objectClass: groupOfUniqueNames
-objectClass: top
-cn: operations
-uniqueMember: uid=bob,ou=users,dc=ibm,dc=com
-uniqueMember: uid=laura,ou=users,dc=ibm,dc=com
-uniqueMember: uid=josie,ou=users,dc=ibm,dc=com
+  # operations, groups, ibm.com
+  dn: cn=operations,ou=groups,dc=ibm,dc=com
+  objectClass: groupOfUniqueNames
+  objectClass: top
+  cn: operations
+  uniqueMember: uid=bob,ou=users,dc=ibm,dc=com
+  uniqueMember: uid=laura,ou=users,dc=ibm,dc=com
+  uniqueMember: uid=josie,ou=users,dc=ibm,dc=com
 
-# support, groups, ibm.com
-dn: cn=support,ou=groups,dc=ibm,dc=com
-objectClass: groupOfUniqueNames
-objectClass: top
-cn: support
-uniqueMember: uid=carlos,ou=users,dc=ibm,dc=com
-uniqueMember: uid=jackie,ou=users,dc=ibm,dc=com
-uniqueMember: uid=tony,ou=users,dc=ibm,dc=com
+  # support, groups, ibm.com
+  dn: cn=support,ou=groups,dc=ibm,dc=com
+  objectClass: groupOfUniqueNames
+  objectClass: top
+  cn: support
+  uniqueMember: uid=carlos,ou=users,dc=ibm,dc=com
+  uniqueMember: uid=jackie,ou=users,dc=ibm,dc=com
+  uniqueMember: uid=tony,ou=users,dc=ibm,dc=com
 
-# readonly, ibm.com
-dn: cn=readonly,dc=ibm,dc=com
-cn: readonly
-objectClass: simpleSecurityObject
-objectClass: organizationalRole
-userPassword:: e1NTSEF9aWQybWxLSXB2dzlPcGVUUlkzRVBBQk1VWG1nd00rUnU=
-description: LDAP read only user
+  # readonly, ibm.com
+  dn: cn=readonly,dc=ibm,dc=com
+  cn: readonly
+  objectClass: simpleSecurityObject
+  objectClass: organizationalRole
+  userPassword:: e1NTSEF9aWQybWxLSXB2dzlPcGVUUlkzRVBBQk1VWG1nd00rUnU=
+  description: LDAP read only user
 
-# search result
-search: 2
-result: 0 Success
+  # search result
+  search: 2
+  result: 0 Success
 
-# numResponses: 18
-# numEntries: 17
-```
-
-
+  # numResponses: 18
+  # numEntries: 17
+  ```
 
 8. Type `exit` to close your interactive session.
+
+
+
+### Integrate IBM Cloud Private with OpenLDAP <a name="integrate"></a>
+In this section you will configure IBM Cloud Private to use the OpenLDAP server that you just deployed for Role Based Access Control (RBAC)
+
+1. If you aren't already logged in to the ICP Admin Console from a previous exercise, open a browser and navigate to `https://<icp_master_ip>/8443` and log in using `username: admin` and `password: admin`
+
+2. Click **Menu** and then select **Manage > Authentication**
+
+3. When the **No LDAP connection found** message is displayed, click **Create LDAP Connection**
+
+4. Enter the following details
+
+   #### LDAP Connection
+
+   - Name: `OpenLDAP`
+
+   - Type: `Custom`
+
+   - URL: `ldap://ip-of-ldap-service:389`  
+
+     **Note:** You collected the ip-of-ldap-service earlier when you issued the  *kubectl describe service ldap-service* command.)
+
+   #### LDAP authentication
+
+   - Base DN: `dc=ibm,dc=com`
+   - Bind DN: `cn=admin,dc=ibm,dc=com`
+   - Admin Password: `Passw0rd`
+
+   ![LDAP Connection](images/ldap/ldapconnection.jpg)
+
+   #### LDAP Filters
+
+   - Group filter: `(&(cn=%v)(objectclass=groupOfUniqueNames))`
+   - User filter: `(&(uid=%v)(objectclass=inetOrgPerson))`
+   - Group ID map: `*:cn`
+   - User ID map: `*:uid`
+   - Group member ID map: `groupOfUniqueNames:uniqueMember`
+
+   ![LDAP Filters](images/ldap/ldapfilters.jpg)
+
+
+
+# Create Namespaces
+
+To prevent our different groups from being able to view or modify each other's resources we will want to create some level of isolation. To do this we will create namespaces that we can associate with our Teams.
+
+1. Execute the following commands to create ICP namespaces.
+
+   ```
+   kubectl create namespace developers
+
+   kubectl create namespace operations
+
+   kubectl create namespace support
+   ```
+
+
+
+# Create Teams
+
+In the section we will work through the process of creating teams in ICP and assigning them roles. These teams will be based on the LDAP groups that were defined in out OpenLDAP container.
+
+**Note:** Refer to the [Deploying OpenLDAP](./Day1_Lab2_Deploying_OpenLDAP.md ) lab for the LDAP schema reference.
+
+1. Navigate to **Manage -> Teams** in the ICP browser interface.
+
+2. Click **Create team**
+
+3. Enter the team name *developers*
+
+4. Select the developers group from the table below
+
+   **Note:** The LDAP groups will not show up in the table below until a filter is applied. So to find the developers group type "d" on the search field and the groups that start with "d" will be populatd the table. If you want to
+
+5. Grant the developer team ***Editor*** access.
+
+6. Click **Create**.
+
+7. Once the team is created select the team you created from the *Teams* list.
+
+8. Navigate to the *Resources* tab.
+
+9. Click **Add resources**
+
+10. From the list of namespaces select *developers* and click **Add**.
+
+Repeat the process to create two more teams with the values below.
+
+| Team Name  | LDAP Group | Role     | Namespace  |
+| ---------- | ---------- | -------- | ---------- |
+| operations | operations | operator | operations |
+| support    | support    | viewer   | support    |
+
+# Validate the Users
+
+In this section we are going to explore the differences between the groups we created. Follow the steps below to explore the differences between the roles assigned to the different groups.
+
+1. Login as a user from each of the teams you defined and explore the differences between the different roles.
+2. Create an empty ConfigMap object using each user
+
+​	Are you able to see the config maps from other users?
+
+​	Can you see any deployments?
+
+
+
+
+
 
 
 

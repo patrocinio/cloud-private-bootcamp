@@ -2,7 +2,9 @@
 
 NFS is an option for file sharing that is reasonable for ICP sandbox deployments where the expense of setting up a more robust distributed file system such as GlusterFS or IBM Spectrum is not justified.  
 
-If NFS is to be used for a production ICP deployment, then it would need to be deployed in a highly available (HA) topology.  The details of doing an HA deployment of NFS are beyond the scope of this document.
+If NFS is to be used for a production ICP deployment, then it would need to be deployed in a highly available (HA) topology.
+
+The NFS provisioner plugin for dynamic storage allocation is not as mature as other storage providers.  This may be a show-stopper for using NFS as a dynamic storage provider in a production deployment.  The NFS storage provisioner is part of the Kubernetes [External Storage](https://github.com/kubernetes-incubator/external-storage) incubator project.  
 
 [RHEL Configuring the NFS Server](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/storage_administration_guide/nfs-serverconfig)
 
@@ -14,7 +16,7 @@ Many articles can be found with an Internet search on the topic of logical volum
 
 For creating an xfs file system see the RHEL v7 documentation [The XFS File System](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/storage_administration_guide/ch-xfs)
 
-For a sandbox ICP deployment, you can put the file share most any place as long as it is a machine that is intended to be running more-or-less all the time.  In this example we added a disk to the boot/master machine.  That would not be a good choice for a production deployment using NFS.  
+For a sandbox ICP deployment, you can put the file share most any place as long as it is a machine that is intended to be running more-or-less all the time.  In this example we added a disk to the proxy machine.  That would not be a good choice for a production deployment using NFS.  
 
 As mentioned above, a production deployment of NFS would use dedicated VMs for the NFS server primary and secondary.
 
@@ -115,16 +117,16 @@ log      =internal log           bsize=4096   blocks=12799, version=2
          =                       sectsz=512   sunit=0 blks, lazy-count=1
 realtime =none                   extsz=4096   blocks=0, rtextents=0
 ```
-- Mount the XFS file system.  In this example the file system is mounted at `/share`.
+- Mount the XFS file system.  In this example the file system is mounted at `/storage`.
 ```
-mkdir /share
-mount /dev/vg_share/lv_share /share
+mkdir /storage
+mount /dev/vg_share/lv_share /storage
 ```
 - To view the new file system you can use `df -Th`.  That will show the file system type as well as the size statistics for the new file system.
 
 - Add a line to `/etc/fstab` to mount the file system at boot time.
 ```
-/dev/mapper/vg_share-lv_share             /share            xfs     defaults        0 0
+/dev/mapper/vg_share-lv_share             /storage            xfs     defaults        0 0
 ```
 
 ## Install and configure NFS Server
@@ -135,9 +137,9 @@ mount /dev/vg_share/lv_share /share
 yum install -y nfs-utils
 ```
 
-- Edit the `/etc/exports` file to export the `/share` file system.  Add a line such as the following:
+- Edit the `/etc/exports` file to export the `/storage` file system.  Add a line such as the following:
 ```
-/share *.my.subnet.local(rw,sync,no_root_squash)
+/storage *.my.subnet.local(rw,sync,no_root_squash)
 ```
 The man page on `exports` provides all the options and ways that a file system can be exported to some collection of clients.  Wild card characters `*` and `?` may be used to define a collection of hosts.  In practice, the host name pattern would be such that only hosts in the ICP cluster could access the share.
 
@@ -150,4 +152,4 @@ systemctl enable nfs-server --now
 
 # Configure a storage class for the NFS shared file system
 
-- TBD: Need to pull together the details for this.
+- TBD: Need to pull together the details for this. See [https://github.com/kubernetes-incubator/external-storage/tree/master/nfs](https://github.com/kubernetes-incubator/external-storage/tree/master/nfs)

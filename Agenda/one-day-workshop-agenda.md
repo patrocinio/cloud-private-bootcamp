@@ -38,7 +38,10 @@ Combination presentation, demo
 - PPA
 - Helm command line for ICP
 
-# IBM Cloud Private Part I (45 min)
+# IBM Cloud Private (60 min)
+The structure of this may be a walk-through of the console using one or
+more applications to provide content  Assume an ICP cluster with an LDAP configured.
+(*TBD* It would be nice to have an app deployed that was under some load so the monitoring would be interesting.)
 - Overview
 - Introduction to the user interface
 - Deploying/upgrading Helm charts

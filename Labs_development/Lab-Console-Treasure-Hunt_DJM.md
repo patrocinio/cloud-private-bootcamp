@@ -276,4 +276,11 @@ Locate the following information:
 
 Close the **Configure client** dialog box
 
+#### End of Lab Review
+  In this lab exercise you became familiar with the IBM Cloud Private Administration Console by completing a Treasure Hunt. You learned about:
+  - The ICP Admin Console dashboard.
+  - Nodes and Namespaces, Deployments, StatefulSets, DaemonSets, Services and Ingress
+  - Helm Charts.
+  - Storage, Monitoring and Alerts
+
 ## End of Lab Exercise

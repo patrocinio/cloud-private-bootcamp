@@ -72,6 +72,7 @@ The **Kebernetes CLI** is now installed and will be used later in the workshop
 
   ```
   cd /tmp
+
   wget https://clis.ng.bluemix.net/download/bluemix-cli/0.6.1/linux64
   ```
 
@@ -79,8 +80,11 @@ The **Kebernetes CLI** is now installed and will be used later in the workshop
 
   ```
   mv ./linux64 bx.tar.gz
+
   tar -xvf bx.tar.gz
+
   cd Bluemix_CLI*
+
   ./install_bluemix_cli
   ```
 
@@ -88,6 +92,7 @@ The **Kebernetes CLI** is now installed and will be used later in the workshop
 
   ```
   cd /tmp
+
   wget "https://<icp_master_ip>:8443/api/cli/icp-linux-amd64" --no-check-certificate
   ```
 
@@ -164,6 +169,7 @@ The **Kebernetes CLI** is now installed and will be used later in the workshop
 
   ```
   cd /tmp
+
   docker run -e LICENSE=accept --net=host -v /usr/local/bin:/data ibmcom/icp-helm-api:1.0.0 cp /usr/src/app/public/cli/linux-amd64/helm /data
   ```
 
@@ -213,5 +219,10 @@ The **Kebernetes CLI** is now installed and will be used later in the workshop
 
   The **Helm CLI** is now installed and will be used later in the workshop
 
+#### End of Lab Review
+  In this lab exercise you have been installed and configured some of the command line tools that can be used with IBM Cloud Private:
+  - Installed kubectl and configured it for use with your ICP Cluster
+  - Installed the IBM Cloud CLI
+  - Installed the Helm CLI
 
 ## End of Lab Exercise

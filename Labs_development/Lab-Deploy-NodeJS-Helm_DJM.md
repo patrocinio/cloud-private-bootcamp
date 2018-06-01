@@ -91,9 +91,11 @@ In this section you will deploy, test and then remove the NodeJS Sample Helm Cha
 
 2. Configure the kubectl command line to connect to your ICP Cluster (Click the **User** icon on the navigation bar in the ICP Admin Console and then select **Configure Client** and copy the commands and paste them in to the terminal window
 
-3. Issue the following command to login the ICP CLI in to your ICP Cluster.  
+3. Issue the following commands to login the ICP CLI in to your ICP Cluster.  
 
   ```
+  cd /root
+
   bx pr login -a https://<icp_master_ip>:8443 --skip-ssl-validation
   ```
 
@@ -109,9 +111,13 @@ In this section you will deploy, test and then remove the NodeJS Sample Helm Cha
 
   ```
   cd /tmp
+
   mkdir nodejs-sample
+
   cd nodejs-sample
+
   git int
+
   git pull https://github.com/ibm-developer/icp-nodejs-sample
   ```
 
@@ -119,6 +125,7 @@ In this section you will deploy, test and then remove the NodeJS Sample Helm Cha
 
   ```
   cd chart/ibm-nodejs-sample
+
   helm install --name nodejs-sample-cli --namespace nodejs-lab . --tls
   ```
 
@@ -150,10 +157,17 @@ In this section you will deploy, test and then remove the NodeJS Sample Helm Cha
 
 12. Return to the **ICP Admin Console**, navigate to the **Helm Releases** page and validate that the **nodejs-sample-cli** Helm Release is displayed. Drill-down and validate that the **Port** for the Service is the same as the what was returned by the CLI
 
-13. Issue the following commands to remove the NodeJS Sample Helm Chart
+13. The command to remove the NodeJS Sample Helm Chart is shown below, however, you will use it again in the Logging Lab so it will be left running at this time.
 
   ```
+  NOTE: DO NOT ISSUE THIS COMMAND AT THIS TIME, IT IS HERE FOR REFERENCE ONLY
   helm delete --purge nodejs-sample-cli --tls
   ```
+
+#### End of Lab Review
+  In this lab exercise you have deployed your first Helm Charts:
+  - Created a new Kubernetes namespaces
+  - Deployed the NodeJS Helm Chart from the ICP Admin console
+  - Deployed the NodeJS Helm Chart using the Helm CLI
 
 ## End of Lab Exercise

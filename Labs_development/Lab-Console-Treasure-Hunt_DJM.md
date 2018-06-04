@@ -33,17 +33,17 @@ Lab - Console Treasure Hunt
 [15. Command Line Parameters](#cmdline)
 
 ## Overview
-In this lab exercise you will become familiar with the IBM Cloud Private Administration Console by completing a Treasure Hunt.
+In this lab exercise, you explore the IBM Cloud Private Administration Console by completing a Treasure Hunt.
 
 ### Log in to your ICP Admin Console <a name="login"></a>
-If you aren't already logged in to the ICP Admin Console from a previous exercise, open a browser and navigate to `https://<icp_master_ip>/8443`
+If you are not already logged in to the ICP Admin Console from a previous exercise, open a browser and navigate to `https://<icp_master_ip>/8443`
 
 ![ICP Login Screen](images/treasurehunt/login.jpg)
 
-Log in using `username: admin` and `password: admin`
+Log in by using `username: admin` and `password: admin`
 
 ### Getting Started <a name="gettingstarted"></a>
-The first screen that is displayed when you successfully log in is the **Getting Started** page.
+The **Getting Started** page displays after you successfully log in.
 ![ICP Getting Started Screen](images/treasurehunt/getstarted.jpg)
 
 Locate the following information:
@@ -52,10 +52,10 @@ Locate the following information:
 
 2. Which catalog item would you use if you want to **build a 12-factor microservice**?
 
-3. What tool could you use to **chat with the team** if you have any issues?
+3. What tool can you use to **chat with the team** if you have any issues?
 
 ### Dashboard <a name="dashboard"></a>
-Click **Menu** (in the top left corner of the page) and then select **Dashboard** to navigate to the Dashboard page. The Dashboard page provides an overview of the current status of the ICP cluster.
+Click **Menu** in the top left corner of the page, and then select **Dashboard** to navigate to the Dashboard page. The Dashboard page provides an overview of the current status of the ICP cluster.
 ![ICP Dashboard](images/treasurehunt/dashboard.jpg)
 
 Locate the following information:
@@ -67,14 +67,14 @@ Locate the following information:
 3. Are all of the **Deployments** in your ICP Cluster healthy?
 
 ### Nodes <a name="nodes"></a>
-Click **Menu** and then select **Platform > Nodes** to navigate to the Nodes page. This page displays information about the nodes that are part of the ICP Cluster.
+Click **Menu**, and then select **Platform > Nodes** to navigate to the Nodes page. This page displays information about the nodes that are part of the ICP Cluster.
 ![ICP Nodes Screen](images/treasurehunt/nodes.jpg)
 
-Note: Click the **command prompt** icon in the bottom right corner of the screen to see the command that a user would need to issue from the **Kubernetes CLI command prompt** to see the same information that has been displayed in the Administration Console.
+Note: Click the **command prompt** icon in the bottom right corner of the screen to see the command that a user can issue from the **Kubernetes CLI command prompt** to see the same information that displays in the Administration Console.
 
 ![ICP CLI Commands](images/treasurehunt/cli.jpg)
 
-Click on the **Name** of the node to *drill down* and see more information about a node.
+Click the **Name** of the node to *drill down* and see more information about the node.
 ![ICP Node Name](images/treasurehunt/nodename.jpg)
 
 Locate the following information:
@@ -98,9 +98,9 @@ Namespaces are also known as tenants or accounts. In IBM Cloud Private, users ar
 
 Locate the following information:
 
-1. How many **namespaces** have been automatically created in your cluster during installation?
+1. How many **namespaces** were automatically created in your cluster during installation?
 
-2. What **actions** are you able to take on namespaces?
+2. What **actions** can you take on namespaces?
 
 ### Helm Charts <a name="helmcharts"></a>
 Click **Catalog** on the navigation bar to navigate to the Helm Chart Catalog page.
@@ -112,19 +112,21 @@ The Catalog displays Helm charts, which contain application packages that can ru
 
 ![ICP Catalog](images/treasurehunt/catalog.jpg)
 
-Note: Click on the Helm Chart name to view the readme file
+Note: Click on the Helm Chart name to view the readme file.
 
 Locate the following information:
 
 1. What date was the **ibm-jenkins-dev** Helm chart released?
 
-2. How many MQ servers does the **ibm-mq-advanced-dev** Helm chart deploy?
+2. How many MQ servers does the **ibm-mqadvanced-server-dev** Helm chart deploy?
 
 3. What type of server does the **ibm-swift-sample** Helm chart deploy the sample application on?
 
 Click **Menu** and then select **Manage > Helm Repositories** to navigate to the list of configured Helm repositories page.
 
 ![ICP Helm Repositories](images/treasurehunt/helmrepo.jpg)
+
+Note: If you want to connect to other repositories, you can add them here. 
 
 ### Storage <a name="storage"></a>
 Click **Menu** and then select **Platform > Storage** to navigate to the Storage page.
@@ -164,7 +166,7 @@ Locate the following information:
 
 4. Which **pod** is using the most CPU currently?
 
-Close the Grafana browser tab
+Close the Grafana browser tab.
 
 ### Alerts <a name="alerts"></a>
 Click **Menu** and then select **Platform > Alerting** to open the ICP Alert Manager in a new browser tab.
@@ -183,21 +185,21 @@ Click **Menu** and then select **Workloads > Deployments** to navigate to the De
 ![ICP Deployments](images/treasurehunt/deployments.jpg)
 
 Notes:
-1. Click on a Deployment Name to *drill down* and see more information such as the **Pods** that are part of the Deployment. Drill-down on a Pod to find out information about the Container and Logs
+1. Click on a Deployment Name to *drill down* and see more information, such as the **Pods** that are part of the Deployment. Scroll down, and click a Pod to find out information about the Container and Logs.
 
-2. Use the **Namespace** drop down box in the top right corner of the page to change the Deployments that are displayed.
+2. Use the **Namespace** drop-down menu in the top right corner of the page to change the Deployments that are displayed.
 
 Locate the following information:
 
-1. How many Deployments are in the **default** Namespace
+1. How many Deployments are in the **default** Namespace?
 
-2. How many **Pods** are part of the **helm-api** Deployment
+2. How many **Pods** are part of the **helm-api** Deployment?
 
-3. Which **Containers** are part of the **helm-api** Deployment
+3. Which **Containers** are part of the **helm-api** Deployment?
 
-4. Find the **Logs** for the **es-client** Container in the **logging-elk-client** Deployment
+4. Find the **Logs** for the **es-client** Container in the **logging-elk-client** Deployment.
 
-5. Which **Ports** are exposed on the **es-client** Container in the **logging-elk-client** Deployment
+5. Which **Ports** are exposed on the **es-client** Container in the **logging-elk-client** Deployment?
 
 ### StatefulSets <a name="statefulsets"></a>
 Click **Menu** and then select **Workloads > StatefulSets** to navigate to the StatefulSets page. Like a Deployment, a StatefulSet manages Pods that are based on an identical container spec. Unlike a Deployment, a StatefulSet maintains a sticky identity for each of their Pods. These pods are created from the same spec, but are not interchangeable: each has a persistent identifier that it maintains across any rescheduling.
@@ -215,7 +217,7 @@ Locate the following information:
 4. Find the **Logs** for the **iamge-manager* Container in the **image-manager-0** StatefulSet
 
 ### DaemonSets <a name="daemonsets"></a>
-Click **Menu** and then select **Workloads > DaemonSets** to navigate to the DaemonSets page. A DaemonSet ensures that all (or some) Nodes run a copy of a Pod. As nodes are added to the cluster, Pods are added to them. As nodes are removed from the cluster, those Pods are garbage collected. Deleting a DaemonSet will clean up the Pods it created.
+Click **Menu**, and then select **Workloads > DaemonSets** to navigate to the DaemonSets page. A DaemonSet ensures that all (or some) Nodes run a copy of a Pod. As nodes are added to the cluster, Pods are added to the cluster. As nodes are removed from the cluster, those Pods are garbage-collected. Deleting a DaemonSet cleans up the Pods that it created.
 
 ![ICP DaemonSet](images/treasurehunt/daemonset.jpg)
 
@@ -228,15 +230,15 @@ Locate the following information:
 3. How does Kubernetes know which Nodes to deploy a DaemonSet to?
 
 ### Services <a name="services"></a>
-Click **Menu** and then select **Network Access > Services** to navigate to the Services page. Kubernetes Pods are mortal. They are born and when they die, they are not resurrected. ReplicaSets in particular create and destroy Pods dynamically (e.g. when scaling up or down). While each Pod gets its own IP address, even those IP addresses cannot be relied upon to be stable over time. This leads to a problem: if some set of Pods (let’s call them backends) provides functionality to other Pods (let’s call them frontends) inside the Kubernetes cluster, how do those frontends find out and keep track of which backends are in that set?
+Click **Menu**, and then select **Network Access > Services** to navigate to the Services page. Kubernetes Pods are mortal;  when they die, they are not resurrected. ReplicaSets in particular create and destroy Pods dynamically (when scaling up or down). While each Pod gets its own IP address, even those IP addresses cannot be relied upon to be stable over time. This leads to a problem: if some set of Pods (for example, call them backends) provides functionality to other Pods (for example,  call them frontends) inside the Kubernetes cluster, how do those frontends find out and keep track of which backends are in that set?
 
 Enter **Services**.
 
-A Kubernetes Service is an abstraction which defines a logical set of Pods and a policy by which to access them - sometimes called a micro-service. The set of Pods targeted by a Service is (usually) determined by a Label Selector.
+A Kubernetes Service is an abstraction that defines a logical set of Pods and a policy by which to access them - sometimes called a microservice. The set of Pods targeted by a Service is typically determined by a Label Selector.
 
 ![ICP Services](images/treasurehunt/services.jpg)
 
-Note: Use the **Action** link next to a service to view more information than is displayed in the Admin Console
+Note: Use the drop-down menu in the upper left corner to customize the number of items displayed per page, or click **>** in the upper right corner to page through a long list of services. Click a service to view more information about it. Click the Action link to view and edit the contents of a service.
 
 Locate the following information:
 
@@ -244,9 +246,9 @@ Locate the following information:
 
 2. Which **Port** is the **monitoring-prometeus** Service exposing?
 
-3. What is the **targetPort** for the **monitoring-prometeus** Service? (Hint: use the Action link to *drill down* on the Service)
+3. What is the **targetPort** for the **monitoring-prometheus** Service? (Hint: use the Action link to *drill down* on the Service)
 
-4. In order to access the **monitoring-prometeus** Service would an application use the **Port** and **targetPort**?
+4. In order to access the **monitoring-prometheus** Service, would an application use the **Port** and **targetPort**?
 
 5. Can you access a Service in an ICP Cluster from a browser running outside of the ICP Cluster network?
 
@@ -274,13 +276,13 @@ Locate the following information:
 
 1. What should you do with the commands that are displayed here?
 
-Close the **Configure client** dialog box
+Close the **Configure client** dialog box.
 
 #### End of Lab Review
-  In this lab exercise you became familiar with the IBM Cloud Private Administration Console by completing a Treasure Hunt. You learned about:
-  - The ICP Admin Console dashboard.
-  - Nodes and Namespaces, Deployments, StatefulSets, DaemonSets, Services and Ingress
-  - Helm Charts.
+  In this lab exercise, you explored the IBM Cloud Private Administration Console by completing a Treasure Hunt. You learned about:
+  - The ICP Admin Console dashboard
+  - Nodes, Namespaces, Deployments, StatefulSets, DaemonSets, Services, and Ingress
+  - Helm Charts
   - Storage, Monitoring and Alerts
 
 ## End of Lab Exercise

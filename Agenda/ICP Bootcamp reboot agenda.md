@@ -36,8 +36,21 @@
 - (Lab) Log monitoring
 - (Lab) Resource monitoring
 - (Lab) Advanced log monitoring
-## Days 4-5 (Integration, migration, and problem determination) 
-- CI/CD pipelines
+## Day 4 (DevOps and development) ##
+- IBM CI/CD pipelines
+- (Lab) CI/CD pipelines
+- Cloud Automation Manager
+- (Lab) Cloud Automation Manager
+- Microclimate
+- (Lab) Installing and using microclimate
+- Cloud native development-BlueCompute use case
+- (Lab) IBM reference architecture for cloud native development on Kubernetes
+- API Connect
+- (Demo) API Connect installation
+## Day 5 (Application Modernization)
+- Middleware migration and application modernization
+- Migration tools-Transformation Advisor and others
+- Course conclusion
 - Middleware migration
 - Migration tools
 - Monitoring and problem determination

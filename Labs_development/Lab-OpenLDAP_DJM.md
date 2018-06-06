@@ -221,7 +221,7 @@ In this section, you create a Kubernetes **Deployment** and a Kubernetes **Servi
   ```
 
 
-8. To verify that the LDAP server is responding, and that the LDAP user and groups are available, you connect to the pod with an interactive shell by using the following command:
+8. Connect to the pod with an interactive shell by using the following command:
 
    `kubectl exec <pod_name> -it bash`
 
@@ -233,7 +233,7 @@ In this section, you create a Kubernetes **Deployment** and a Kubernetes **Servi
 
    ```
 
-9. Run the following command to perform an **ldapsearch**:
+9. To verify that the LDAP server is responding, and that the LDAP user and groups are available, run the following command to perform an **ldapsearch**:
 
   `ldapsearch -x -h localhost -b dc=ibm,dc=com -D "cn=admin,dc=ibm,dc=com" -w Passw0rd`
 

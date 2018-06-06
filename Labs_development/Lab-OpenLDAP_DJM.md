@@ -61,7 +61,7 @@ In this lab exercise, you deploy a standalone OpenLDAP Docker Container that has
 
 *Note: This is not intented to be a production LDAP server, it is only being used as an example for integrating ICP with an LDAP server, and testing RBAC concepts.*
 
-> **If you would like to build your own OpenLDAP Docker image that is based on this image, you can find the source code here**: https://github.com/jdiggity22/openldap
+> **If you want to build your own OpenLDAP Docker image that is based on this image, you can find the source code here**: https://github.com/jdiggity22/openldap
 
 
 ### Deploying and Testing OpenLDAP <a name="deploytest"></a>

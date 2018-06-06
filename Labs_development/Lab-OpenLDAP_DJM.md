@@ -9,7 +9,7 @@ Lab - Configuring IBM Cloud Private to use OpenLDAP
 ## Overview
 In this lab exercise, you deploy a standalone OpenLDAP Docker Container that has been pre-configured with some users and groups to IBM Cloud Private. Later, you configure IBM Cloud Private to use the OpenLDAP instance that you deployed.
 
-<u>When the OpenLDAP server is running, the ldap schema looks like this:</u>
+<u>When the OpenLDAP server is running, the LDAP schema looks like this:</u>
 
 > **<u>OU=Users</u>**
 >

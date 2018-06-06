@@ -1,21 +1,30 @@
-## Day 1 (Foundation technologies) ##
+## Day 1 (Basics and installation) ##
 
+- Welcome and kickoff
+- Adopting cloud technologies 
 - Introduction to ICP
-- Container and Docker
-- Container orchestration and Kubernetes
-- Helm
-- Twelve factor apps, microservices, and Istion service mesh
-- Cloud Foundry
-## Day 2 (Infrastructure and architecture) ##
-- Adopting cloud technologies
-- Infrastructure and architecture concepts
-- Sizing and capacity planning
-- Services catalog
-- Storage and network
-- Resiliency
+- Installation
+- (Lab) Installation
+- Containers and Docker
+- (Lab) Build a docker image and push to the registry
+- Installation review
+- (Lab) Console treasure hunt
+- (Lab) Confirm installation by exploring the logs
+## Day 2 (Foundation technologies, infrastructure and architecture) ##
+- (Lab) Install CLI and tools
+- Overview of container orchestration
+- Kubernetes basics
+- Kubernetes resiliency
+- (Lab) Autoscaling test with Kubernetes
+- (Lab) Secure Kubernetes with CalicoResiliency
+- Helm basics
+- Creating a Helm chart
+- (Lab) Deploy a Helm chart-NodeJS
+- (Lab) NFS storage provisioner
+- Infrastructure and architecture
+- Storage
+- (Lab) Add GlusterFS cluster
 - Backup and restore
-- Security
-- Troubleshooting
 ## Day 3 (Installation and configuration)##
 - IBM Cloud Private installation
 - Configuration

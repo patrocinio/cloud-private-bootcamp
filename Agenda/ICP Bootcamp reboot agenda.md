@@ -25,11 +25,17 @@
 - Storage
 - (Lab) Add GlusterFS cluster
 - Backup and restore
-## Day 3 (Installation and configuration)##
-- IBM Cloud Private installation
-- Configuration
-- Installing a service
-- High availability
+## Day 3 ("Day 2" operations and troubleshooting) ##
+- Introduction to ICP networking
+- Resiliency
+- (Lab) Resiliency scenarios
+- Security
+- (Lab) ICP LDAP integration
+- (Lab) Certificate management
+- Logging and monitoring
+- (Lab) Log monitoring
+- (Lab) Resource monitoring
+- (Lab) Advanced log monitoring
 ## Days 4-5 (Integration, migration, and problem determination) 
 - CI/CD pipelines
 - Middleware migration

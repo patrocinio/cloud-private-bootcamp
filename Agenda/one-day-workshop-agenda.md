@@ -63,12 +63,6 @@ more applications to provide content  Assume an ICP cluster with an LDAP configu
 - Concerns, trade-offs, pitfalls
 - Development process overview
 
-# Microservices Part II (60 minutes)
-- IBM microservices reference architecture
-- Walk through of microservices application implementation
-- API Connect overview
-- Datapower oveview (optional) *TBD* is this relevant here?
-
 # Database options (60 minutes)
 - Databases and microservice architecture
 - ACID vs BASE
@@ -109,6 +103,14 @@ Assumes we can demonstration a CI/CD pipeline with some application
 
 # Other Topics
 The topics below are expected to be for a specialized audience.
+
+## Microservices Part II (60 minutes)
+For audiences interested in a deeper dive into micoservices and additional IBM related products that support the reference architecture
+- IBM microservices reference architecture
+- Walk through of microservices application implementation
+- API Connect overview
+- Datapower oveview (optional) *TBD* is this relevant here?
+
 
 ## IBM Cloud Private Production Deployment (60 minutes)
 For the operations team

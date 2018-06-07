@@ -7,22 +7,22 @@ Lab - Logging
 [2. Introduction to using Kibana](#intro)
 
 ## Overview
-In this lab exercise you will gain some experience using **kubectl** to view logs and **Kibana** to review and analyze logs collected from your ICP Cluster
+In this lab exercise, you gain some experience using **kubectl** to view logs and **Kibana** to review and analyze logs collected from your ICP Cluster.
 
 ### Introduction to kubectl logging commands <a name="kubectl"></a>
-In this section you will use kubcetl commands to view logs from your ICP CLUSTER
+In this section, you use kubcetl commands to view logs from your ICP CLUSTER.
 
-1. If you don't already have one open, open a **terminal** session connected to your `master` node as the **root** user
+1. If you do not already have one open, open a **terminal** session connected to your `master` node as the **root** user.
 
-2. Configure the kubectl command line to connect to your ICP Cluster (Click the **User** icon on the navigation bar in the ICP Admin Console and then select **Configure Client** and copy the commands and paste them in to the terminal window
+2. Configure the kubectl command line to connect to your ICP Cluster. Click the **User** icon on the navigation bar in the ICP Admin Console, and then select **Configure Client**. Copy the commands and paste them in to the terminal window.
 
-3. Enter the following command to view the logs for the nodejs sample that you deployed earlier in the workshop using the **Deployment**.
+3. Enter the following command to view the logs for the nodejs sample (that you deployed earlier in the workshop) by using the **Deployment**:
 
   ```
   kubectl logs deployment/nodejs-sample-cli-ibm-no --namespace nodejs-lab
   ```
 
-  The output will be similar to the output shown below:
+  The output is similar to the output shown below:
 
   ```
   # kubectl logs deployment/nodejs-sample-cli-ibm-no --namespace nodejs-lab
@@ -38,13 +38,13 @@ In this section you will use kubcetl commands to view logs from your ICP CLUSTER
 
   ```
 
-4. Another way to access the same logs is by using the **app label**. Enter the following command to view the logs for the nodejs sample that you deployed earlier in the workshop using the **app label**.
+4. Another way to access the same logs is by using the **app label**. Enter the following command to view the logs for the nodejs sample (that you deployed earlier in the workshop) by using the **app label**:
 
   ```
   kubectl logs -lapp=nodejs-sample-cli-ibm-no-selector --namespace=nodejs-lab
   ```
 
-5. Another way to access the same logs is by using the **pod name**. Enter the following commands to get the pod name and then get the logs for the pod.
+5. Another way to access the same logs is by using the **pod name**. Enter the following commands to get the pod name, and then get the logs for the pod:
 
   ```
   export PODNAME=$(kubectl get pods -l app=nodejs-sample-cli-ibm-no-selector --namespace=nodejs-lab -o=jsonpath="{.items[0].metadata.name}")
@@ -53,41 +53,41 @@ In this section you will use kubcetl commands to view logs from your ICP CLUSTER
   ```
 
 ### Introduction to using Kibana <a name="intro"></a>
-In this section you will use Kibana to review infrastructure and application logs and create some simple charts and graphs
+In this section, you use Kibana to review infrastructure and application logs and create some simple charts and graphs.
 
 #### Access Kibana
-Kibana was installed in the **kube-system** namespace during IBM Cloud Private installation and integrated in to the ICP Admin Console.
+Kibana was installed in the **kube-system** namespace during IBM Cloud Private installation and integrated into the ICP Admin Console.
 
-1. If you aren't already logged in to the ICP Admin Console from a previous exercise, open a browser and navigate to `https://<icp_master_ip>/8443` and log in using `username: admin` and `password: admin`
+1. If you are not already logged in to the ICP Admin Console from a previous exercise, open a browser and navigate to `https://<icp_master_ip>/8443`. Log in by using `username: admin` and `password: admin`.
 
-2. Click **Menu** and then select **Platform > Logging** to access Kibana.
+2. Click **Menu**, and then select **Platform > Logging** to access Kibana.
 
 #### Configure an Index Pattern
-When you first access the Kibana GUI you are prompted to create an Index Pattern which is used to access data in ElasticSearch.
+When you first access the Kibana GUI, you are prompted to create an Index Pattern, which is used to access data in ElasticSearch.
 
-1. The **Index name or pattern** defaults to `logstash-*`. Select `@timestamp` from the **Time Filter field name** drop-down and click **Create**
+1. The **Index name or pattern** defaults to `logstash-*`. Select `@timestamp` from the **Time Filter field name** drop-down and click **Create**.
 
   ![IndexPattern](images/logging101/indexpattern.jpg)
 
-2. Click **Discover** on the left-side menu to run a default query against ElasticSearch for all log messages that have been generated in the last 15 minutes
+2. Click **Discover** on the left-hand menu to run a default query against ElasticSearch for all log messages that have been generated in the last 15 minutes.
 
   ![Discover](images/logging101/discover.jpg)
 
 #### View the logs for the nodejs sample
-Now you will use Kibana to view the logs for the nodejs sample and modify the fields that are displayed on the screen
+In this section, you use Kibana to view the logs for the nodejs sample, and modify the fields that are displayed on the screen.
 
-1. In the search box, enter ```kubernetes.namespace: nodejs-lab``` to see the logs for the nodejs sample
+1. In the search field, enter ```kubernetes.namespace: nodejs-lab``` to see the logs for the nodejs sample.
 
   ![NodeJS Logs](images/logging101/nodejs.jpg)
 
-2. Now you will modify the fields that are shown on the screen. Click the **Settings icon** on the **Available Fields** line and add the following fields: ``` kubernetes.container_name, log, stream ```
+2. Modify the fields that are shown on the screen. Click the **Settings icon** on the **Available Fields** line, and add the following fields: ``` kubernetes.container_name, log, stream ```
 
   ![NodeJS Log Fields](images/logging101/fields.jpg)
 
 #### Import a Dashboard and some Visualizations
-In this section you will import some basic visualizations and a dashboard that demonstrate some of the capabilities of Kibana
+In this section, you import some basic visualizations and a dashboard that demonstrates some of the capabilities of Kibana.
 
-1. Copy the following **visualization** definitions in to a local file named ```kibana-visualations.txt```
+1. Copy the following **visualization** definitions in to a local file named ```kibana-visualations.txt```.
 
   ```
   [
@@ -122,7 +122,7 @@ In this section you will import some basic visualizations and a dashboard that d
   ]
   ```
 
-2. Copy the following **dashboard** definitions in to a local file named ```kibana-dashboard.txt```
+2. Copy the following **dashboard** definitions in to a local file named ```kibana-dashboard.txt```.
 
   ```
   [
@@ -146,39 +146,39 @@ In this section you will import some basic visualizations and a dashboard that d
   ]
   ```
 
-3. Click **Management** on the left-side menu
+3. Click **Management** on the left-hand menu.
 
-4. Click **Kibana --> Saved Objects** and then click **Import**
+4. Click **Kibana --> Saved Objects**, and then click **Import**.
 
-5. Select `kibana-visualizations.txt` and when prompted select **Yes, overwrite all**
+5. Select `kibana-visualizations.txt`, and when prompted, select **Yes, overwrite all**.
 
-6. Click on the **Visualizations** tab to see the newly imported visualizations
+6. Click the **Visualizations** tab to see the newly imported visualizations.
 
   ![Visualizations](images/logging101/visualizations.jpg)
 
-7. Click **Import**
+7. Click **Import**.
 
-8. Select `kibana-dashboard.txt` and when prompted select **Yes, overwrite all**
+8. Select `kibana-dashboard.txt`, and when prompted, select **Yes, overwrite all**.
 
-9. Click on the **Dashboards** tab to see the newly imported visualizations
+9. Click the **Dashboards** tab to see the newly imported visualizations.
 
   ![Dashboards](images/logging101/dashboard.jpg)
 
 #### Open the Dashboard
-In this section you will open the dashboard that you just imported
+In this section, you open the dashboard that you just imported.
 
-1. Click **Dashboard** on the left-side menu and then select **Message counts** to display the dashboard that you imported. It has two visualizations; one shows the number of messages per namespace and the other shows the number of message per container
+1. Click **Dashboard** on the left-hand menu, and then select **Message counts** to display the dashboard that you imported. It has two visualizations: one shows the number of messages per namespace, and the other shows the number of message per container.
 
   ![Dashboards](images/logging101/dashboard1.jpg)
 
-2. Click **Last 15 minutes** in the top right-hand corner and change the time selector to 7 days and watch how the data changes automatically
+2. Click **Last 15 minutes** in the top right-hand corner, and change the time selector to 7 days. Watch how the data changes automatically.
 
   ![Time Select](images/logging101/timeselect.jpg)
 
-3. Close the Kibana browser tab
+3. Close the Kibana browser tab.
 
 #### End of Lab Review
-In this lab exercise you have been introduced to logging in IBM Cloud Private:
+In this lab exercise, you looked at logging in IBM Cloud Private. You:
 - Used kubcetl to view the logs for a deployed application in a variety of different ways
 - Accessed Kibana and created an initial Index pattern
 - Viewed the most recent log messages for the ICP Cluster

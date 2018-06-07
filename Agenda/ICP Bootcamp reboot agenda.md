@@ -50,11 +50,11 @@
 ## Day 5 (Application Modernization)
 - Middleware migration and application modernization
 - Migration tools-Transformation Advisor and others
-- Course conclusion
 - Middleware migration
 - Migration tools
 - Monitoring and problem determination
 - Cloud Automation Manager
 - Cloud native
+- Course conclusion
 
  

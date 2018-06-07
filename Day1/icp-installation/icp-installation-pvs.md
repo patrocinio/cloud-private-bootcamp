@@ -106,7 +106,7 @@ Additional things that need to be set for a production environment:
 - vip_iface, cluster_vip
 - proxy_vip_iface, proxy_vip
 
-You may want to include a `version` attribute in `config.yaml`.  I if you do, be sure it matches the version of the images in the docker registry that you want to use.  You can do a `docker images` list to check the version tags of the available images.  The version that will be deployed is set to an appropriate default in a YAML file in the icp-inception container so it setting the `version` value in `config.yaml` is intended for cases where the docker registry being used contains images from more than one version.  
+You may want to include a `version` attribute in `config.yaml`.  If you do, be sure it matches the version of the images in the docker registry that you want to use.  You can do a `docker images` list to check the version tags of the available images.  The version that will be deployed is set to an appropriate default in a YAML file in the icp-inception container so it setting the `version` value in `config.yaml` is intended for cases where the docker registry being used contains images from more than one version.  
 
 Likewise, you may want to include a `backup_version` attribute value in the `config.yaml`.  Again, make sure the value of `backup_version` makes sense for the docker registry in use in that it matches the tag on the images that are intended to be the backup version.
 
@@ -165,7 +165,7 @@ Docker is used to run the install for all members of the cluster/cloud.  The com
 
 *NOTE:* It is OK to run this command multiple times to get things installed on all members of the cluster/cloud should problems show up with a particular cluster/cloud member.  At least for basic problems, the error messages are very clear about where the problems are, e.g., network connectivity, firewall issues, docker not running.
 
-*NOTE:* As of ICP v2.1.0.2, an uninstall is recommended after a failed installation.  The installation detects that some lock files are still present if an uninstall has not been done and prompts you to do an uninstall.
+*NOTE:* As of ICP v2.1.0.2, an uninstall is recommended after a failed installation.  The installation detects that some lock files are still present if an uninstall has not been done and prompts you to do an uninstall. (Development work is on-going to make the ICP installation steps idempotent to avoid needing to do an uninstall after a failed installation.)
 
 *NOTE:* During the installation all information messages go to stdout/stderr.  If you want to capture a log of the installation process, you need to direct output to a file.  The docker command line below uses `tee` to capture the log and also allow it to be visible in the shell window. A logs directory in `<ICP_HOME>/cluster>` was created to hold the log files. The log file will have escape character sequences in it for color coding the text output, but it is readable.
 ```

@@ -163,12 +163,12 @@ Now that ELK is running, access Kibana and verify that you can see data from all
 
 5. Click **Discover** on the left-hand menu to run a default query against ElasticSearch for all log messages that have been generated in the last 15 minutes.
 
-6. Modify the fields that are shown on the screen. Click the **Settings icon** on the **Available Fields** line, and add the following fields: ``` kubernetes.namespace, log ```
+6. Modify the fields that are shown on the screen. Click the **Settings icon** on the **Available Fields** line, and add the following fields: ``` kubernetes.namespace```, and ```log```. 
 
 **Note:** the namespaces that are displayed include kube-system, which proves that this ELK instance is collecting data from other namespaces.
 
 ### Modifying filebeat to only send certain logs <a name="filebeat"></a>
-The **filebeat** component is responsible for collecting log messages from containers and forwarding them to logstash. The version of filebeat in ICP 2.1.0.3 is 5.5.1 which has no **kubernetes** extensions. As a result, the log message that are forwarded have the following format which has no concept of namespaces or containers:
+The **filebeat** component is responsible for collecting log messages from containers and forwarding them to Logstash. The version of filebeat in ICP 2.1.0.3 is 5.5.1 which has no **kubernetes** extensions. As a result, the log messages that are forwarded have the following format, which has no concept of namespaces or containers:
 
   ```
   "@timestamp": "2018-06-01T16:34:56.387Z",
@@ -196,12 +196,12 @@ The **filebeat** component is responsible for collecting log messages from conta
   }
   ```
 
-**Logstash** parses the log messages using the following rules: `"source" => "/var/log/containers/%{kubernetes.pod}_%{kubernetes.namespace}_%{container_file_ext}  `
+**Logstash** parses the log messages by using the following rules: `"source" => "/var/log/containers/%{kubernetes.pod}_%{kubernetes.namespace}_%{container_file_ext}  `
 
   For example: `"source": "/var/log/containers/calico-node-w8l8l_kube-system_calico-node-7e588613060d064587557aa204ffaddace743a405ea1dac20f6fcf6a03d016e0.log",
   ` is parsed in to **kubernetes.pod** = calico-node-w8l8l and **kubernetes.namespace** = kube-system
 
-In this section you will modify the filebeat configuration to only send log messages for a given set of namespaces.
+In this section, you modify the filebeat configuration to only send log messages for a given set of namespaces.
 
 1. Run the following command to open a vi session to change the filebeat configuration
 
@@ -235,13 +235,13 @@ In this section you will modify the filebeat configuration to only send log mess
   `kubectl get pods --namespace elk-lab |grep filebeat|awk '{print $1}' | xargs -i sh -c 'kubectl delete pod -o name {} --namespace elk-lab && sleep 4'
 `
 
-6. Wait a few minutes for filebeat to restart and the logs to start being processed.
+6. Wait a few minutes for filebeat to restart and the logs to start processing.
 
-7. Return to Kibana and refresh the **Discover** page. Note that the most recent logs are from `elk-lab` and not `kube-system`
+7. Return to Kibana and refresh the **Discover** page. Note that the most recent logs are from `elk-lab` and not `kube-system`.
 
-8. Search for logs from `kube-system` using ```kubernetes.namespace: kube-system``` and verify that they aren't recent. Changing the filebeat parameters doesn't delete old logs that had already been collected.
+8. Search for logs from `kube-system` by using ```kubernetes.namespace: kube-system```, and verify that they are not recent. Changing the filebeat parameters does not delete old logs that were already collected.
 
-9. In the ICP Admin Console navigate to the `elk-lab-ibm-icplogging-filebeat-ds` **DaemonSet** and look at the logs. You will see **DBG  Publish** and **DBG  Drop Event** messages like the ones below that show the message that filebeat sends to ElasticSearch and the messages that are dropped:
+9. In the ICP Admin Console navigate to the `elk-lab-ibm-icplogging-filebeat-ds` **DaemonSet** and look at the logs. You see **DBG  Publish** and **DBG  Drop Event** messages like the ones below that show the message that filebeat sends to ElasticSearch, and the messages that are dropped:
 
 ```
 2018/06/01 18:57:41.613174 client.go:214: DBG  Publish: {

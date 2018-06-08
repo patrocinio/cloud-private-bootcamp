@@ -157,15 +157,15 @@ Now that ELK is running, access Kibana and verify that you can see data from all
 
 3. Click the **NodePort** link to open Kibana.
 
-4. Configure an **Index Pattern** using **Index name or pattern**: `logstash-*` and **Time Filter field name**: `@timestamp`
+4. Configure an **Index Pattern** by using **Index name or pattern**: `logstash-*`, and **Time Filter field name**: `@timestamp`.
 
   ![IndexPattern](images/logging2/indexpattern.jpg)
 
 5. Click **Discover** on the left-hand menu to run a default query against ElasticSearch for all log messages that have been generated in the last 15 minutes.
 
-2. Modify the fields that are shown on the screen. Click the **Settings icon** on the **Available Fields** line, and add the following fields: ``` kubernetes.namespace, log ```
+6. Modify the fields that are shown on the screen. Click the **Settings icon** on the **Available Fields** line, and add the following fields: ``` kubernetes.namespace, log ```
 
-**Note:** the namespaces that are displayed include kube-system which proves that this ELK instance is collecting data from other namespaces
+**Note:** the namespaces that are displayed include kube-system, which proves that this ELK instance is collecting data from other namespaces.
 
 ### Modifying filebeat to only send certain logs <a name="filebeat"></a>
 The **filebeat** component is responsible for collecting log messages from containers and forwarding them to logstash. The version of filebeat in ICP 2.1.0.3 is 5.5.1 which has no **kubernetes** extensions. As a result, the log message that are forwarded have the following format which has no concept of namespaces or containers:

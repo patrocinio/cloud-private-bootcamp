@@ -7,15 +7,15 @@ Lab - Restricting ELK Logging
 [2. Modifying filebeat to only send certain logs](#filebeat)
 
 ## Overview
-Many organizations use a single ICP Cluster to host multiple *tenants*. These tenants are granted access to a given set of namespaces and resources and shouldn't be able to see or administer other namespaces owned by other tenants. Configuration is required to restrict the logs collected and analyzed by ELK to the correct namespaces. In this lab exercise you will install ELK in a namespace and then configure it to only collect certain logs.
+Many organizations use a single ICP Cluster to host multiple *tenants*. These tenants are granted access to a given set of namespaces and resources, and should not be able to see, or administer other namespaces that are owned by other tenants. Configuration is required to restrict the logs that are collected and analyzed by ELK to the correct namespaces. In this lab exercise, you install ELK in a namespace, and then configure it to only collect certain logs.
 
 ### Installing a dedicated ELK stack <a name="install"></a>
-In this section, you create a new namespace and install ELK using the IBM provided Helm Chart.
+In this section, you create a new namespace and install ELK by using the IBM provided Helm Chart.
 
 #### Create Persistent Volumes (PV)
 ELK requires two PVCs to function. The following steps walk you through the process of creating the PVs.
 
-**Note**: In this lab environment, the NFS Server is running on the icp-proxy node. In a *production* environment, a dedicated NFS Server will probably exist.
+**Note**: In this lab environment, the NFS Server is running on the icp-proxy node. In a *production* environment, a dedicated NFS Server probably exists.
 
 1. In a **terminal** session that is connected to your `proxy` node as the **root** user, run the following commands to create the directories that are mapped to the PV:
 
@@ -66,8 +66,9 @@ ELK requires two PVCs to function. The following steps walk you through the proc
         path: /storage/elk-storage2
         server: 9.37.138.12
     ```
+4. Configure the kubectl command line to connect to your ICP Cluster. Click the User icon on the navigation bar in the ICP Admin Console, and then select Configure Client. Copy the commands and paste them in to the terminal window.
 
-4. Create the Persistent Volumes by using the following commands:
+5. Create the Persistent Volumes by using the following commands:
 
     ```
     kubectl create -f ./elk-pv1.yaml
@@ -85,7 +86,7 @@ In this section you will create a new namespace for the standalone ELK stack
     ```
 
 #### Configure the namespace for privileged containers
-The ELK containers require the IPC_LOCK privilege which must be added to the new namespaces
+The ELK containers require the IPC_LOCK privilege, which must be added to the new namespaces.
 
 1. Run the following command to open a vi session to change the security policy
 
@@ -112,10 +113,10 @@ The ELK containers require the IPC_LOCK privilege which must be added to the new
     name: system:serviceaccounts:elk-lab
   ```
 
-3. Save your changes and quit the vi session
+3. Save your changes and quit the vi session.
 
 #### Deploy the ELK Helm Chart
-In this section you will deploy an instance of ELK in to the **elk-lab** namespace
+In this section you deploy an instance of ELK in to the **elk-lab** namespace.
 
 1. Click **Catalog** from the ICP Admin Console menu bar to navigate to the Catalog of Helm Charts, and search for the `ibm-icplogging` chart.
 
@@ -150,11 +151,11 @@ In this section you will deploy an instance of ELK in to the **elk-lab** namespa
 #### Access Kibana
 Now that ELK is running, access Kibana and verify that you can see data from all namespaces in the ICP Cluster.
 
-1. Click **Menu**, and then select **Network Access --> Services**
+1. Click **Menu**, and then select **Network Access --> Services**.
 
-2. Click on the **kibana** service in the **elk-lab** namespaces
+2. Click the **kibana** service in the **elk-lab** namespace.
 
-3. Click on the **NodePort** link to open Kibana
+3. Click the **NodePort** link to open Kibana.
 
 4. Configure an **Index Pattern** using **Index name or pattern**: `logstash-*` and **Time Filter field name**: `@timestamp`
 

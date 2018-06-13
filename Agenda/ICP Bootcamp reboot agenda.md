@@ -16,7 +16,7 @@
 - Kubernetes basics
 - Kubernetes resiliency
 - (Lab) Autoscaling test with Kubernetes
-- (Lab) Secure Kubernetes with CalicoResiliency
+- (Lab) Secure Kubernetes with Calico
 - Helm basics
 - Creating a Helm chart
 - (Lab) Deploy a Helm chart-NodeJS

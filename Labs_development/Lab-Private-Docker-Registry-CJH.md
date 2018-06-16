@@ -25,9 +25,9 @@ Make a directory called "HelloFromLiberty" that will hold all of the components 
 1. The "HelloFromLiberty.war" WAR file;
 2. A Dockerfile.
 
-A Dockerfile is a file that contains instruction for the Docker "build" command that describe the components and the process for building a Docker image.
+A Dockerfile is a file that contains instructions for the Docker "build" command that describe the components and the process for building a Docker image.
 
-Copy the HelloFromLiberty.war file into the new HelloFromLiberty directory that you just created.  Then, with the Linux editor of your choice, create a file with the name "Dockerfile" that contains the following 2 lines:
+Copy the [HelloFromLiberty.war](Assets/privateregistry/HelloFromLiberty.war) file into the new HelloFromLiberty directory that you just created.  Then, with the Linux editor of your choice, create a file with the name "Dockerfile" that contains the following 2 lines:
 
 ![Dockerfile](images/privateregistry/Private-Registry-03.png)
 

@@ -10,6 +10,8 @@ Lab - Push Docker Images to the ICP Private Docker Registry
 
 [4. Prepare to Push the Docker Image to the ICP Private Docker Registry](#prepthepush)
 
+[5. Push a Docker Image to the ICP Private Docker Registry](#pushtheimage)
+
 ## Overview <a name="Overview"></a>
 In this lab exercise you will take a Java application packaged as a WAR file, build a Docker container combining the official IBM WebSphere Liberty Docker image with the application WAR file and finally we will logon to the ICP Private Docker Registry and push out custom Docker image to the registry.
 
@@ -35,7 +37,7 @@ When you are finished your directory should look like this:
 
 Next you will build the Docker image.
 
-## Building a Docker Image <a name="buildanimage"></a>
+## Build a Docker Image <a name="buildanimage"></a>
 
 Make sure that you are positioned in the HelloFromLiberty directory then run the Docker "build" command as shown in the following image to build your Docker image
 
@@ -84,7 +86,7 @@ The tag that you attached to the Docker image when you created it did not contai
 
 ![Add an Image Tag](images/privateregistry/Private-Registry-07.png)
 
-## Push a Docker Image to the ICP Private Docker Registry
+## Push a Docker Image to the ICP Private Docker Registry <a name="pushtheimage"></a>
 
 You have created a Docker image, prepared the image for the ICP Private Docker Registry, and prepared ICP to receive the image.  The final 2 steps in the process are:
 

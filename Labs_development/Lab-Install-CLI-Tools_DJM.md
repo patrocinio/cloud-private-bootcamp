@@ -14,11 +14,7 @@ Lab - Install CLI and Tools
 In this lab exercise, you install the Kubernetes CLI, the IBM Cloud Private CLI, and other useful tools.
 
 ### Install kubectl <a name="kubectl"></a>
-1. In a **terminal** session, connect to your `master` node as the **root** user, and run the following command to install the `kubectl` Kubernetes CLI:
-
-  ```
-  docker run -e LICENSE=accept --net=host -v /usr/local/bin:/data ibmcom/icp-inception:2.1.0.3-ee cp /usr/local/bin/kubectl /data
-  ```
+1.Follow the steps at https://kubernetes.io/docs/tasks/tools/install-kubectl/ to install kubectl in your laptop.
 
 ### Configure kubectl to connect to your ICP Cluster <a name="connect"></a>
 1. If you are not already logged in to the ICP Admin Console from a previous exercise, open a browser and navigate to `https://<icp_master_ip>/8443`. Log in by using `username: admin` and `password: admin`.
@@ -88,20 +84,14 @@ The **Kubernetes CLI** is now installed, and is used later in the workshop.
   ./install_bluemix_cli
   ```
 
-3. Run the following command to download the **ICP CLI** from your ICP instance (insert the IP address of your master node):
-
-  ```
-  cd /tmp
-
-  wget "https://<icp_master_ip>:8443/api/cli/icp-linux-amd64" --no-check-certificate
-  ```
-
+3. Follow the procedure at https://www.ibm.com/support/knowledgecenter/SSBS6K_2.1.0.3/manage_cluster/install_cli.html to install the IBM Cloud CLI
+<!--
 4. Run the following command to install the ICP CLI:
 
   ```
   bx plugin install ./icp-linux-amd64
   ```
-
+-->
 5. Run the following command to login the ICP CLI in to your ICP Cluster:
 
   ```
@@ -148,6 +138,7 @@ The **Kubernetes CLI** is now installed, and is used later in the workshop.
   ```
 
   The results of the command are shown below:
+  
   ```
   # bx pr cluster-get mycluster
   Retrieving cluster mycluster...
@@ -165,14 +156,8 @@ The **Kubernetes CLI** is now installed, and is used later in the workshop.
   The **IBM ICP CLI** is now installed, and is used later in the workshop.
 
 ### Install the Helm CLI <a name="helm"></a>
-1. In the terminal window, run the following commands to download and install the **Helm CLI**:
-
-  ```
-  cd /tmp
-
-  docker run -e LICENSE=accept --net=host -v /usr/local/bin:/data ibmcom/icp-helm-api:1.0.0 cp /usr/src/app/public/cli/linux-amd64/helm /data
-  ```
-
+1. Follow the procedure described at https://docs.helm.sh/using_helm/ to install the Helm CLI
+2. 
 2. Run the following command to initialize the **Helm CLI**:
   ```
   helm init -c

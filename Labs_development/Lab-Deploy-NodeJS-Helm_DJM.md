@@ -126,19 +126,19 @@ In this section, you deploy, test, and then remove the NodeJS Sample Helm Chart 
   ```
   cd chart/ibm-nodejs-sample
 
-  helm install --name nodejs-sample-cli --namespace nodejs-lab . --tls
+  helm install --name nodejs-sample-cli --namespace <your-namespace> . --tls
   ```
 
 8. Run the following command to validate that the Helm Chart has been deployed:
 
   ```
-  helm list --namespace nodejs-lab --tls
+  helm list --namespace <your-namespace> --tls
   ```
 
 9. Run the following command to get the port that was assigned to the Service:
 
   ```
-  kubectl get --namespace nodejs-lab services nodejs-sample-cli-ibm-no
+  kubectl get --namespace <your-namespace> services nodejs-sample-cli-ibm-no
   ```
 
   The output is similar to that shown below. Locate the **Service port** (in the example below; it is **32457**).

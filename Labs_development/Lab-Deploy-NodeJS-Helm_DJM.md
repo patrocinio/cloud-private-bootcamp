@@ -12,13 +12,13 @@ Lab - Deploy a Simple Helm Chart: NodeJS Sample
 In this lab exercise you will deploy a sample NodeJS Helm Chart.
 
 ### Create a new Namespace <a name="namespace"></a>
-In this section you will create a new namespace to deploy the Helm Charts in to.
+In this section you will create a new namespace to deploy the Helm Charts into.
 
 1. If you aren't already logged in to the ICP Admin Console from a previous exercise, open a browser and navigate to `https://<icp_master_ip>/8443` and log in using `username: admin` and `password: admin`
 
 2. Click **Menu** and then select **Manage > Namespaces** to navigate to the Namespaces page.
 
-3. Create a new Namespace named **helm-lab**. Click **Create Namespace**, enter helm-lab for the name, and click **Create**.
+3. Create a unique Namespace, containing your name. Click **Create Namespace**, enter the namespace name for the name, and click **Create**.
 
   ![Namespace](images/helm101/namespace.jpg)
 
@@ -39,8 +39,8 @@ In this section, you deploy, test, and then remove the NodeJS Sample Helm Chart 
 
   | Parameter       | Value |
   | ------------- |-------------|
-  | Release name     | nodejs-sample |
-  | Target namespace      | helm-lab      |
+  | Release name     | nodejs-sample-&lt;your name&gt; |
+  | Target namespace      | &lt;your namespace&gt;      |
   | I have read and agreed to the License Agreements | yes      |
   | Image tag | 8     |
 
@@ -48,9 +48,9 @@ In this section, you deploy, test, and then remove the NodeJS Sample Helm Chart 
 
   ![Installation Started](images/helm101/installationstarted.jpg)
 
-7. Click **Menu**, and then select **Workloads > Helm Resleases** to navigate to the Helm Releases page.
+7. Click **Menu**, and then select **Workloads > Helm Releases** to navigate to the Helm Releases page.
 
-8. Type **nodejs-sample** in the **Search** field to locate the Helm Chart that you just deployed.
+8. Type **nodejs-sample-&lt;your name&gt;** in the **Search** field to locate the Helm Chart that you just deployed.
 
   ![Helm Release](images/helm101/helmrelease1.jpg)
 
@@ -76,7 +76,7 @@ In this section, you deploy, test, and then remove the NodeJS Sample Helm Chart 
 
 16. Close the Appmetrics Dashboard **browser tab**, and return to the **ICP Admin console**.
 
-17. Locate the **nodejs-sample** Helm Release on the **Workloads > Helm Resleases** page again.
+17. Locate the **nodejs-sample-&lt;your-name&gt;** Helm Release on the **Workloads > Helm Releases** page again.
 
 18. Click the **Action** link for the **nodejs-sample** Helm Release and select **Delete**. 
 

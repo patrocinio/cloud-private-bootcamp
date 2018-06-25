@@ -144,7 +144,7 @@ In this section, you deploy, test, and then remove the NodeJS Sample Helm Chart 
   The output is similar to that shown below. Locate the **Service port** (in the example below; it is **32457**).
 
   ```
-  # kubectl get --namespace nodejs-lab services nodejs-sample-cli-ibm-no
+  # kubectl get --namespace <your-namespace> services nodejs-sample-cli-ibm-no
   NAME                       TYPE       CLUSTER-IP   EXTERNAL-IP   PORT(S)          AGE
   nodejs-sample-cli-ibm-no   NodePort   10.0.0.207   <none>        3000:32457/TCP   1m
   ```

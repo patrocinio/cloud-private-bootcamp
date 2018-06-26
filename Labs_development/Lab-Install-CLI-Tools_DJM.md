@@ -65,7 +65,7 @@ The **Kubernetes CLI** is now installed, and is used later in the workshop.
 
 ### Install the ICP CLI <a name="bxcli"></a>
 
-3. Follow the procedure at https://www.ibm.com/support/knowledgecenter/SSBS6K_2.1.0.3/manage_cluster/install_cli.html to install the IBM Cloud CLI
+1. Follow the procedure at https://www.ibm.com/support/knowledgecenter/SSBS6K_2.1.0.3/manage_cluster/install_cli.html to install the IBM Cloud CLI
 <!--
 4. Run the following command to install the ICP CLI:
 
@@ -73,13 +73,13 @@ The **Kubernetes CLI** is now installed, and is used later in the workshop.
   bx plugin install ./icp-linux-amd64
   ```
 -->
-5. Run the following command to login the ICP CLI in to your ICP Cluster:
+2. Run the following command to login the ICP CLI in to your ICP Cluster:
 
   ```
   bx pr login -a https://<icp_master_ip>:8443 --skip-ssl-validation
   ```
 
-6. Enter `username: admin` and `password: admin` when prompted, and select the `mycluster Account` as shown below.
+3. Enter `username: admin` and `password: admin` when prompted, and select the `mycluster Account` as shown below.
 
   ```
   # bx pr login -a https://9.37.138.189:8443 --skip-ssl-validation
@@ -112,7 +112,7 @@ The **Kubernetes CLI** is now installed, and is used later in the workshop.
   OK
   ```
 
-7. Run the following command to get information about your cluster:
+4. Run the following command to get information about your cluster:
 
   ```
   bx pr cluster-get mycluster

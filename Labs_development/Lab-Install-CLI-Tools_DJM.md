@@ -64,25 +64,6 @@ In this lab exercise, you install the Kubernetes CLI, the IBM Cloud Private CLI,
 The **Kubernetes CLI** is now installed, and is used later in the workshop.
 
 ### Install the ICP CLI <a name="bxcli"></a>
-1. In the terminal window, run the following commands to download the **IBM Cloud CLI**
-
-  ```
-  cd /tmp
-
-  wget https://clis.ng.bluemix.net/download/bluemix-cli/0.6.1/linux64
-  ```
-
-2. Run the following commands to install the IBM Cloud CLI:
-
-  ```
-  mv ./linux64 bx.tar.gz
-
-  tar -xvf bx.tar.gz
-
-  cd Bluemix_CLI*
-
-  ./install_bluemix_cli
-  ```
 
 3. Follow the procedure at https://www.ibm.com/support/knowledgecenter/SSBS6K_2.1.0.3/manage_cluster/install_cli.html to install the IBM Cloud CLI
 <!--

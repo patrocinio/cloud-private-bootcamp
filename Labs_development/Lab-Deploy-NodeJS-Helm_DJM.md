@@ -124,7 +124,7 @@ In this section, you deploy, test, and then remove the NodeJS Sample Helm Chart 
   ```
   cd chart/ibm-nodejs-sample
 
-  helm install --name nodejs-sample-cli --namespace <your-namespace> . --tls
+  helm install --name nodejs-sample-<your-name> --namespace <your-namespace> . --tls
   ```
 
 8. Run the following command to validate that the Helm Chart has been deployed:

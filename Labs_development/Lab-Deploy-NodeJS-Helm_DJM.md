@@ -87,8 +87,6 @@ In this section, you deploy, test, and then remove the NodeJS Sample Helm Chart 
 ### Deploy the NodeJS Helm Chart using the Helm CLI <a name="cmdDeploy"></a>
 In this section, you deploy, test, and then remove the NodeJS Sample Helm Chart by using the Helm CLI.
 
-1. If you don't already have one open, open a **terminal** session that is connected to your `master` node as the **root** user.
-
 2. Configure the kubectl command line to connect to your ICP Cluster (Click the **User** icon on the navigation bar in the ICP Admin Console and then select **Configure Client** and copy the commands and paste them in to the terminal window.
 
 3. Run the following commands to log in to the ICP CLI for your ICP Cluster.  

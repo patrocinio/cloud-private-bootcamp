@@ -156,7 +156,7 @@ The **Kubernetes CLI** is now installed, and is used later in the workshop.
   The **IBM ICP CLI** is now installed, and is used later in the workshop.
 
 ### Install the Helm CLI <a name="helm"></a>
-1. Follow the procedure described at https://docs.helm.sh/using_helm/ to install the Helm CLI
+1. Follow the procedure described at https://github.com/kubernetes/helm/releases/tag/v2.7.2/ to install the Helm CLI
 2. 
 2. Run the following command to initialize the **Helm CLI**:
   ```

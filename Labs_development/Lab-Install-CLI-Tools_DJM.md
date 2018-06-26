@@ -112,7 +112,7 @@ The **Kubernetes CLI** is now installed, and is used later in the workshop.
   OK
   ```
 
-4. Run the following command to get information about your cluster:
+7. Run the following command to get information about your cluster:
 
   ```
   bx pr cluster-get mycluster
@@ -177,7 +177,13 @@ The **Kubernetes CLI** is now installed, and is used later in the workshop.
   local  	http://127.0.0.1:8879/charts                              
   ```
 
-4. Run the following command to list the currently installed Helm releases:
+4. Define the HELM_HOME variable by running the following command:
+
+	```
+	export HELM_HOME=/root/.helm
+	```
+
+5. Run the following command to list the currently installed Helm releases:
 
   ```
   helm list --tls

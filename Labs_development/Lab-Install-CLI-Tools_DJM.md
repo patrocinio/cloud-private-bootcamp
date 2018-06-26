@@ -14,7 +14,7 @@ Lab - Install CLI and Tools
 In this lab exercise, you install the Kubernetes CLI, the IBM Cloud Private CLI, and other useful tools.
 
 ### Install kubectl <a name="kubectl"></a>
-1.Follow the steps at https://kubernetes.io/docs/tasks/tools/install-kubectl/ to install kubectl in your laptop.
+1.Follow the steps at https://github.com/kubernetes/helm/releases/tag/v2.7.2/ to install kubectl in your laptop.
 
 ### Configure kubectl to connect to your ICP Cluster <a name="connect"></a>
 1. If you are not already logged in to the ICP Admin Console from a previous exercise, open a browser and navigate to `https://<icp_master_ip>/8443`. Log in by using `username: admin` and `password: admin`.

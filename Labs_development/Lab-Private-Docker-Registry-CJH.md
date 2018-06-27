@@ -75,8 +75,23 @@ The tag that you attached to the Docker image when you created it does not conta
 
 You created a Docker image, prepared the image for the ICP Private Docker Registry, and prepared ICP to receive the image.  The final two steps in the process are:
 
-1. Authenticate with the ICP Private Docker Registry.
-2. Push your Docker image to the registry.
+1. Add the ICP master IP address to your hosts file
+2. Authenticate with the ICP Private Docker Registry.
+3. Push your Docker image to the registry.
+
+### Add the ICP master IP address to the hosts file
+
+On your laptop, add the following line to `/etc/hosts` file:
+
+```
+<master-node-IP-address> mycluster.icp
+```
+
+You can test it's working by running the following command:
+
+```
+ping mycluster.icp
+```
 
 ### Authenticate to the ICP Private Docker Registry
 

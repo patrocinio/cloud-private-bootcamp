@@ -39,13 +39,17 @@ Next, you build the Docker image.
 
 ## Build a Docker Image <a name="buildanimage"></a>
 
-Make sure that you are in the HelloFromLiberty directory, and then run the Docker "build" command as shown in the following image:
+Make sure that you are in the HelloFromLiberty directory, and then run the Docker "build" command as shown in the following image.
+
+**Replace demoicp with the name of your namespace you created earlier this week**
 
 ![Build the HelloFromLiberty Docker Image](images/privateregistry/Private-Registry-04.png)
 
 The "-t" option in the above build command instructs Docker to add a "tag" to the image that it builds.  The "." indicates that the Dockerfile to use to build the Docker image is located in the current directory.  After the Docker image is successfully created, you do not see the resulting image in the current directory. Docker build stores the newly created Docker image in the "local" Docker repository.  The "local" Docker repository is a repository that resides on the server on which you execute the Docker build command.
 
 After the build is complete, you can use the Docker "images" command to view the contents of the local Docker repository.
+
+**Replace demoicp with the name of your namespace you created earlier this week**
 
 ![Local Repository](images/privateregistry/Private-Registry-05.png)
 
@@ -56,26 +60,6 @@ Before you can successfully push a Docker image to the ICP Private Docker Regist
 1. ICP must have a namespace that matches the name of the repository within the registry that you are storing the Docker image in.
 2. The Docker image must be prefixed with the URI for the ICP Private Docker Registry.
 
-### Create a Namespace in ICP
-
-Recall from above that when you built the Docker image, the tag that is assigned to it contains the repository name "demoicp".  You musto make sure that ICP has a matching namespace defined. If there is no namespace in ICP that corresponds to the repository in the ICP Private Docker Registry, then you get an authentication error when you attempt to push your Docker image.
-
-Log in to the ICP console as admin/admin, and from the navigation menu, select "Namespaces".
-
-![Console Namespaces](images/privateregistry/Private-Registry-08.png)
-
-Scroll through the list of namespaces defined in ICP, and confirm that there is no namespace with the name "demoicp".  If there is an existing namespace by that name, then you are done with this step, and you can log out.  If, however, there is no namespace with the name "demoicp", create one by clicking "Create Namespace":
-
-![New Namespace](images/privateregistry/Private-Registry-09.png)
-
-In the pop-up window, enter the name of the new namespace, "demoicp," and click "create":
-
-![Create Namespace](images/privateregistry/Private-Registry-10.png)
-
-After the namespace is created, confirm that it appears in the list of available namespaces.
-
-![ICP Namespaces](images/privateregistry/Private-Registry-11.png)
-
 ### Add the Registry URI to the Docker Image Tag
 
 To successfully push a Docker image to the ICP Private Docker Registry, the image tag must conform to the correct format, as follows:
@@ -83,6 +67,7 @@ To successfully push a Docker image to the ICP Private Docker Registry, the imag
 	<Registry URI>/<Repository Name>/<Image Name>:<Image Version>
 	
 The tag that you attached to the Docker image when you created it does not contain the registry URI as a prefix.  Before you can push the Docker image to the registry, you must add another tag to the image. A Docker image can be tagged with an any number of tags, so in this case, so you can add a tag, rather than rename one.  Use the Docker "tag" command to add a tag to the Docker image:
+
 
 ![Add an Image Tag](images/privateregistry/Private-Registry-07.png)
 

@@ -93,6 +93,19 @@ You can test it's working by running the following command:
 ping mycluster.icp
 ```
 
+### Configure authentication to the Docker CLI
+
+Before we login to docker, we need to import the SSL certificate to your local machine. 
+
+Follow the instrutions provided at https://www.ibm.com/support/knowledgecenter/SSBS6K_2.1.0.3/manage_images/configuring_docker_cli.html to create the directory in your laptop
+
+with one change:
+* Instead of running scp to copy the certificate from the Master Node, run the following command:
+
+```
+openssl s_client -connect mycluster.icp:8500 -showcerts 2>/dev/null | openssl x509 -outform PEM > ~/.docker/certs.d/mycluster.icp:8500/ca.crt
+```
+
 ### Authenticate to the ICP Private Docker Registry
 
 To authenticate to the ICP Private Docker Registry, use the Docker "login" command with your ICP console credentials (admin/admin):

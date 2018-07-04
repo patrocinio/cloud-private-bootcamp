@@ -136,7 +136,7 @@ In this section, you deploy, test, and then remove the NodeJS Sample Helm Chart 
 9. Run the following command to get the port that was assigned to the Service:
 
   ```
-  kubectl get --namespace <your-namespace> services nodejs-sample-cli-ibm-no
+  kubectl get --namespace <your-namespace> services nodejs-sample-<your-name>
   ```
 
   The output is similar to that shown below. Locate the **Service port** (in the example below; it is **32457**).
